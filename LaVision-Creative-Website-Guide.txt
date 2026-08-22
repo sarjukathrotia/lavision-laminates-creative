@@ -1,0 +1,433 @@
+MORE THAN MOST
+LaVision Laminates
+Creative Website Direction & Build Guide
+A playful, non-boxy, animation-first website — glass header, puzzle-piece
+testimonials, wave dividers, doodles, and a gallery full of motion.
+React + Vite · Tailwind · Framer Motion · GSAP · Three.js · Lenis
+Contents
+1.  The idea — “More than most, and it shows”
+2.  Grounded in your brand & showroom
+3.  The signature moments (the wow list)
+4.  Colour palette — “Sunlit Studio”
+5.  Typography — no Google Fonts
+6.  Creativity toolkit — what to borrow from each reference site
+7.  Tech stack & libraries
+8.  Motion system — which tool does what
+9.  Gallery — six different animation styles
+10. Doodle system
+11. Non-boxy design rules
+12. Cursor prompt — global setup
+13. Cursor prompts — section by section
+14. Performance & accessibility
+15. Assets to prepare
+1. The idea — “More than most, and it shows”
+Your logo has a wave curling over the word “Vision,” and your tagline is “more than most.” Your showroom is full of arches, curved counters, wavy louvers and an organic mirror. Nothing about your brand is a straight box — so the website shouldn’t be either.
+The creative concept is called “Ripple & Doodle”. Two ideas run through every page:
+Ripple — everything flows. Wavy section dividers, fluid blob shapes, liquid hover ripples, smooth scroll. The wave from your logo becomes the connective tissue of the whole site.
+Doodle — hand-drawn marks. Little squiggles, circled words, arrows and stars that “draw” themselves on as you scroll. They add the friendly, human, “more than most” warmth and keep it from ever feeling corporate.
+On top of that sit the three things you specifically asked for: a glass (frosted) header, a puzzle-piece testimonials section that snaps together, and a gallery that shows off several different animations. No boxy cards, no template feel — this is built to sit on Awwwards, not to look like every other laminate site.
+2. Grounded in your brand & showroom
+These choices aren’t random — they come straight from your real assets. Your logo gives us the wave and the pink/blue. Your showroom gives us warm wood, cream walls, curved architecture and the lime-green accent (the chairs). We echo all of it on screen so the site feels like walking into your space.
+Curved counter, arched niche, organic mirror, lime chairs, typographic wall art — already “more than most.”
+From your world
+How it shows up on the site
+The wave in the logo
+Wavy SVG dividers between sections; ripple effect on buttons; fluid page transitions.
+Pink + blue of the logo
+The two lead accent colours, used vivid on small marks and pastel on big fills.
+Lime-green chairs
+A third playful accent for highlights, doodles and hover states.
+Curved arches & niches
+Arch-framed images and organic blob shapes instead of rectangles.
+Typographic wall art
+The doodle + big-type headline treatment on the hero and section intros.
+Warm wood & cream walls
+Cream/sand background palette — light and airy, never stark white.
+3. The signature moments (the wow list)
+Six set-pieces carry the “wow.” Spend the animation budget here; keep everything in between calm so these land.
+1. Glass header
+A floating, frosted-glass navigation pill that sits over the content with a soft blur, a 1px light border and a faint colour tint picked up from the section behind it. It shrinks slightly and its blur deepens once you scroll. Reference: Aceternity glass nav + Magic UI border-beam on the edge.
+2. Puzzle-piece testimonials
+The section you described: pastel jigsaw cards, each holding one customer quote, that snap into place one by one as you scroll until they interlock into a complete grid. Built with real jigsaw-edged SVG shapes (not rounded rectangles) in pink, blue, lime and peach pastels, animated in with GSAP (a spring “snap” on each piece, staggered). A last piece “clicks” in to complete the picture.
+3. Wave / ripple dividers
+Between sections, an animated SVG wave (straight from the logo) that gently morphs and drifts, and on scroll the next section rises up behind it. Uses GSAP MorphSVG-style path animation.
+4. Doodle layer
+Hand-drawn squiggles, arrows, circled words, underlines and little stars scattered with intent. They stroke-draw themselves on as they enter the viewport (GSAP DrawSVG-style). This is the single most “yours” element — no other laminate brand will have it.
+5. Fluid blob shapes
+Soft, slowly-morphing organic blobs in pastel tints sit behind headings and images instead of boxes — this is how we honour “no boxy designs.” They drift and squash gently (looping animation).
+6. Liquid hero
+The home hero: a WebGL (Three.js) fluid/ripple surface or an interactive gooey blob that reacts to the cursor, with the headline and a doodle underline on top. Optional lighter version: an animated SVG wave field. Always with a static fallback for low-power devices.
+4. Colour palette — “Sunlit Studio”
+Light and airy as your client asked — a warm cream base with soft pastels doing most of the work. The vivid pink, blue and lime (pulled from your logo and your showroom chairs) appear only as small accents: doodles, hovers, links, one word in a headline. Pastels dominate; the vivid trio pops maybe 5–10% of the time. That keeps it playful without becoming a “pop-colour” site.
+Swatch
+Name
+Hex
+Role
+cream
+#FBF7F0
+Primary background (warm, not white)
+sand
+#EADFCB
+Alternate sections, wood-warm fills
+ink
+#2A2724
+Text and headings (warm charcoal)
+pink (accent)
+#E6329B
+Lead accent — links, marks, one hero word
+pink pastel
+#FBD9EC
+Puzzle cards, blob fills
+sky (accent)
+#1FA9E0
+Second accent — waves, highlights
+sky pastel
+#D6EEF9
+Puzzle cards, blob fills
+lime (accent)
+#9FB524
+Third accent — doodles, hovers
+lime pastel
+#ECF2C6
+Puzzle cards, blob fills
+peach pastel
+#FBE0D2
+Fourth puzzle-card tint
+Rule: background is always cream/sand. Any one screen shows at most two vivid accents at full strength. Pastels can be used freely.
+5. Typography — no Google Fonts
+All self-hostable, none loaded from Google’s CDN. Download the WOFF2 files and serve them from /public/fonts/.
+Role
+Font
+Source
+Why
+Display / headings
+Clash Display
+Fontshare (fontshare.com)
+Characterful, friendly-modern, used big — the awwwards look.
+Body / UI
+General Sans
+Fontshare
+Warm, rounded, highly readable neutral sans.
+Doodle / handwritten
+Shantell Sans
+GitHub (OFL, self-host)
+Hand-drawn feel for circled words & captions — or draw them as SVG.
+Labels / data
+Geist Mono
+Vercel (self-host)
+Eyebrows, stats, small caps labels.
+For the biggest doodle words (“more than most”, circled callouts) draw them as hand-lettered SVG so the strokes can animate on — no font needed there at all.
+Note: this Word file uses Trebuchet MS / Verdana / Consolas as stand-ins because Word can’t embed the fonts above. The website must use the real ones.
+Type scale (desktop; ~30% smaller on mobile)
+Element
+Font
+Size
+Weight
+Hero H1
+Clash Display
+80–120px clamp
+600
+Section H2
+Clash Display
+48–64px
+600
+H3
+General Sans
+24–28px
+600
+Body
+General Sans
+17–19px
+400
+Doodle callout
+Shantell / SVG
+24–40px
+—
+Eyebrow / stat
+Geist Mono
+13px / 56px
+500
+6. Creativity toolkit — what to borrow from each site
+You sent a great reference list. Here’s exactly what to take from each, and where it goes. The first six are component/effect libraries you copy code from; the last group are inspiration galleries for layout ideas.
+Reference site
+Take this
+Use it on
+reactbits.dev
+Split / shiny / gradient text, blob cursor, magnet buttons, wave text
+Hero headline, CTA buttons, cursor
+magicui.design
+Marquee, border-beam, shimmer button, blur-fade text, confetti, ripple
+Brand strip, glass header edge, form success, buttons
+ui.aceternity.com
+Glass nav, spotlight, wobble/3D tilt cards, aurora background, hover reveal
+Header, hero glow, product cards, gallery hovers
+21st.dev
+Ready-made hero/marquee/section blocks to search and drop in
+Speeds up any section
+motion-primitives.com
+Text morph, infinite slider, morphing dialog, animated cursor
+Section intros, lightbox, gallery
+codrops
+WebGL image-hover distortion, page transitions, grid-to-detail expand
+Gallery, Projects, page changes
+gsap.com/showcase
+Scroll storytelling, pinned scenes, SVG draw/morph patterns
+Doodles, waves, pinned sections
+awwwards / godly / land-book
+Layout, hero and section composition inspiration
+Overall art direction
+lapa.ninja / onepagelove / maxibestof
+One-page flow and section-order ideas
+Home page structure
+siteinspire / hoverstat.es
+Interaction and micro-detail inspiration
+Hover states, transitions
+Caution: don’t paste ten effects onto one screen — that’s how creative sites turn into noise. Pick one hero effect per section from this table.
+7. Tech stack & libraries
+Framer Motion is added this time because most of your reference libraries (Aceternity, Magic UI, Motion-Primitives, React Bits) are built on it. GSAP handles scroll, SVG draw/morph and the puzzle snap; Three.js handles the liquid hero and WebGL gallery hovers.
+npm create vite@latest lavision -- --template react
+cd lavision && npm install
+ 
+npm install -D tailwindcss postcss autoprefixer && npx tailwindcss init -p
+ 
+# motion
+npm install framer-motion gsap @gsap/react lenis
+ 
+# 3D / WebGL
+npm install three @react-three/fiber @react-three/drei
+ 
+# routing + icons
+npm install react-router-dom lucide-react
+8. Motion system — which tool does what
+Tool
+Responsible for
+Lenis
+Site-wide smooth scroll; synced to GSAP ScrollTrigger.
+GSAP + ScrollTrigger
+Scroll reveals, pinned scenes, the puzzle snap, stat count-ups, parallax.
+GSAP DrawSVG-style
+Doodles that stroke-draw on; underlines and circled words.
+GSAP MorphSVG-style
+Wave dividers and blob shapes morphing.
+Framer Motion
+Component-level motion for Aceternity / Magic UI / React Bits pieces, hovers, layout transitions.
+Three.js + R3F
+Liquid hero and WebGL image-distortion on gallery hover.
+Flip (GSAP)
+Gallery filter re-layout animation.
+Everywhere: wrap heavy motion in prefers-reduced-motion checks and gsap.matchMedia(); provide a calm fallback.
+9. Gallery — six different animation styles
+You asked for a gallery with different animations. Rather than one grid, break it into scenes — each scrolls in with its own motion, so browsing feels alive. Use your 21 showroom photos across these.
+Scene
+Animation
+1. Arched hero row
+3–4 arch-framed images that scale up and un-blur as they enter (Framer Motion).
+2. Infinite marquee
+A row of photos scrolling sideways forever; slows on hover (Magic UI marquee).
+3. WebGL hover distortion
+Grid where hovering ripples/warps the image (Three.js / Codrops technique).
+4. Sticky stack
+Images stack and swap as you scroll through a pinned section (GSAP pin).
+5. Draggable scatter
+Photos scattered at playful angles you can drag around (Framer Motion drag).
+6. Filter + Flip
+Category chips (Residential / Commercial / Hospitality) re-lay-out the grid with GSAP Flip; click opens a morphing-dialog lightbox.
+10. Doodle system
+Doodles are the signature warmth. Keep them in the three accent colours, thin and hand-drawn, and never more than one or two per screen.
+Doodle
+Where it goes
+Circle / lasso around a word
+One key word in each section heading (e.g. circle “most”).
+Underline squiggle
+Under the hero sub-line and links on hover.
+Arrow
+Pointing from a doodle note to a CTA button.
+Stars / sparkles
+Near testimonials and the “14 years / 500+ dealers” stats.
+Wave / ripple
+Section dividers and under the logo.
+Handwritten note
+Small captions like “visit us!” near the showroom map.
+Build doodles as inline SVG with a stroke path, then animate stroke-dashoffset from full to 0 on scroll-in so they draw themselves. Respect reduced-motion by showing them already drawn.
+11. Non-boxy design rules
+Shapes: No hard rectangles for cards. Use arches, pills, blobs, or jigsaw shapes with soft or organic edges.
+Dividers: Straight section edges are replaced with wave / curve SVG dividers.
+Corners: Prefer generous rounding (24–40px) or true organic blob masks over 4px corners.
+Images: Frame photos inside arches and blob masks, not squares (matches your showroom niches).
+Depth: Avoid drop-shadowed boxes; use soft coloured glows and the glass/blur effect instead.
+Layout: Let elements overlap and sit at slight angles — a scrapbook feel, not a rigid grid.
+12. Cursor prompt — global setup
+Paste this first to scaffold the project and lock the creative system.
+Set up a React + Vite site "LaVision Laminates" — a playful, non-boxy,
+animation-first website for a wholesale laminate & interior brand in Gujarat.
+Install: Tailwind, framer-motion, gsap + @gsap/react, lenis, three +
+@react-three/fiber + @react-three/drei, react-router-dom, lucide-react.
+ 
+Self-host fonts (NOT Google Fonts) via @font-face in index.css from
+/public/fonts/: Clash Display (display), General Sans (body), Shantell Sans
+(handwritten), Geist Mono (labels).
+ 
+Tailwind theme colours: cream #FBF7F0, sand #EADFCB, ink #2A2724,
+pink #E6329B, pinkP #FBD9EC, sky #1FA9E0, skyP #D6EEF9, lime #9FB524,
+limeP #ECF2C6, peachP #FBE0D2. Background cream, text ink, headings Clash
+Display, body General Sans.
+ 
+Design rules: NO boxy cards — use arches, pills, blobs and jigsaw shapes;
+wavy SVG dividers between sections; soft coloured glows instead of drop
+shadows; pastels dominate, vivid pink/sky/lime used only as small accents.
+ 
+Set up Lenis smooth scroll synced to GSAP ScrollTrigger. Create reusable
+components: <Doodle> (inline SVG that stroke-draws on via ScrollTrigger),
+<WaveDivider> (animated SVG wave), <Blob> (slowly morphing organic shape),
+<GlassNav>. All respect prefers-reduced-motion via gsap.matchMedia.
+ 
+Routes: Home, About, Products, Brands, Gallery, Virtual3D, Projects,
+Dealers (FindDealer + BecomeDealer), Showrooms, Contact, CatalogueDownload,
+Privacy, Terms. Shared <GlassNav> header and <Footer> on every page.
+13. Cursor prompts — section by section
+Paste one at a time, in order.
+13.1  Glass header
+Build <GlassNav>: a floating frosted-glass pill nav over the content —
+backdrop-blur, semi-transparent cream tint, 1px light border, soft rounded
+(pill). On scroll it shrinks slightly and blur deepens (GSAP ScrollTrigger).
+Add a subtle animated border-beam (Magic UI style) around the pill.
+Left: LaVision logo. Center 7 links: Home, About, Products▾, Brands, Gallery,
+Dealers▾, Contact. Right: "Virtual 3D" (ghost) + "Download Catalogue" (pink,
+with a ripple on click). Links get a hand-drawn squiggle underline on hover.
+Mobile: hamburger opens a full-screen cream overlay with big staggered links,
+a doodle or two, and both showroom phone numbers.
+13.2  Home — Liquid hero
+Build the Home hero, full-viewport on cream. A Three.js (react-three-fiber)
+liquid/ripple surface OR interactive gooey blob in pink/sky pastels that
+reacts to the cursor. Over it: eyebrow "MORE THAN MOST" (Geist Mono, lime),
+H1 in Clash Display 80–120px: "One-stop world of surfaces." with the word
+"world" lassoed by a hand-drawn SVG doodle that draws on. Sub-line in General
+Sans with a squiggle underline. Two CTAs: "Explore products" (pink) and
+"Try the Virtual 3D room" (ghost). Headline reveals with split-text stagger
+(React Bits style). Provide a static gradient+wave fallback for low-power /
+reduced-motion. End the hero with a <WaveDivider> into the next section.
+13.3  Home — Stats with doodles
+A slim band on sand: three stats in Geist Mono big numbers that count up on
+scroll — "14 years", "500+ dealers", "8+ brands" — each with a small
+hand-drawn star/sparkle doodle that draws on beside it. Playful slight
+rotation on the numbers. Bordered by wave dividers top and bottom.
+13.4  Home — Products (arches, not boxes)
+A "One-stop solution" section: heading in Clash Display with one word circled
+by a doodle. Then the 8 categories (Laminates, MDF, Plywood, Louvers, Acrylic,
+Thermal/Polymer, Furniture Accessories, Cane Sheets) as ARCH-shaped image
+cards (rounded-top arch, like the showroom niches), NOT rectangles. On hover
+the arch lifts and a soft coloured glow appears; image scales inside the arch
+mask. Reveal staggered with Framer Motion. Slight angle variation per card.
+13.5  Home — Brands marquee
+An "Our Brands" infinite marquee (Magic UI style) scrolling the 8 brands —
+LaVision, Vienna, IFILL, Urban, ColorTrip, Tovin, One Touch, Ultimo — as
+pill-shaped chips on pastel blobs, slowing on hover. A second row scrolls the
+opposite direction. Clicking a chip goes to that brand page.
+13.6  Home — Puzzle testimonials (signature)
+Build the puzzle-piece testimonials section. Pastel JIGSAW-shaped cards (real
+puzzle edges via SVG clip-path, in pink/sky/lime/peach pastels), each holding
+one customer quote + name + role (interior designer / dealer / architect). As
+the user scrolls, pieces fly/snap into place ONE BY ONE with a spring "snap"
+(GSAP, staggered) until they interlock into a complete grid; the final piece
+clicks in and a few sparkle doodles pop. Heading above: "The pieces our
+partners love." Provide a simple stacked fallback for reduced-motion.
+13.7  Home — Who we work with + CTA
+A wrapped set of pill tags (no boxes): Interior Designers, Architects,
+Contractors, Builders, Turnkey Professionals, Consultants, Dealers — each on
+a pastel blob, gently floating. Then a full-width CTA on an ink or deep-pink
+organic blob background: "Become a LaVision dealer", a doodle arrow pointing
+to a magnetic "Apply now" button. Include: "Wholesale & super-stockist — we
+do not sell directly to retail."
+13.8  About page
+Build About. Hero: eyebrow "SINCE 2012 · GUJARAT", H1 Clash Display "More
+than most, for 14 years." with "most" circled by a doodle. Intro from brand:
+leading super stockist & wholesale supplier of interior/decorative products,
+14 years, 500+ dealers across Gujarat, super-stockist & wholesaler (not
+retail). Blocks: Vision (one-stop distribution partner for Gujarat); Promise
+"More Than Most" (More Choice/Brands/Designs/Availability/Support/
+Opportunities) shown as floating pastel blobs; "Why choose us" as arch cards.
+Use a real showroom photo inside an arch mask with parallax.
+13.9  Products (index + category template)
+Products index: the 8 categories as large alternating scenes, each image in
+an arch/blob mask that reveals via clip-path on scroll; text with a doodle
+underline. Then a reusable ProductCategory template: breadcrumb, arched hero,
+a finishes swatch grid (pill-shaped swatches), and a "Request wholesale
+pricing / find a dealer" CTA (no retail).
+13.10  Brands (index + single-brand template)
+Brands index: 8 brand cards on pastel blobs, name in Clash Display, a texture
+swatch, short line; hover lifts with a coloured glow. Reusable single-brand
+template: playful hero, story, finishes grid, applications (residential/
+commercial/hospitality/office), dealer CTA. Keep shapes organic, not boxy.
+13.11  Gallery (six animation scenes)
+Build the Gallery as a sequence of scenes, each a different animation, using
+the showroom photos: (1) arch-framed hero row that scales + un-blurs on enter;
+(2) infinite side-scrolling marquee that slows on hover; (3) a grid with WebGL
+hover distortion/ripple (Three.js); (4) a pinned sticky-stack that swaps images
+on scroll; (5) a draggable scattered set at playful angles (Framer Motion
+drag); (6) category chips (All/Residential/Commercial/Hospitality/Office) that
+re-lay-out the grid with GSAP Flip, opening a morphing-dialog lightbox. Wave
+dividers between scenes. Reduced-motion: static grid fallback.
+13.12  Virtual 3D room
+Build the Virtual 3D Model page — the showpiece. A react-three-fiber scene
+of a small stylised room where the user can orbit and swap wall/surface
+finishes live (drei OrbitControls + useTexture); a matte/gloss toggle changes
+roughness. A pastel swatch tray to pick finishes. Copy with a doodle: "See it
+before you order — then find your nearest dealer." CTA "Find a dealer".
+Loader while textures load; image fallback on mobile / reduced-motion.
+13.13  Projects / Work
+Projects page: intro on turnkey/commercial/hospitality/office work. Project
+cards in organic/arch shapes (image, title, type, brands used); hover glow.
+Detail view: wide arched hero with parallax + Codrops-style image reveal, the
+brief, products used, and a small scattered photo strip.
+13.14  Dealers — Find + Become
+Two pages. (1) Find a Dealer: searchable/filterable list by city in Gujarat
+(placeholder data) as pill cards (name, area, phone); optional map; note
+customers buy through authorised dealers, not from LaVision directly.
+(2) Become a Dealer: a lively pitch (More Opportunities for Our Dealers) on
+pastel blobs + an application form (business, contact, city, phone, email,
+current lines, message) with inline validation and a CONFETTI success state
+(Magic UI). Fields animate in staggered.
+13.15  Showrooms
+Showrooms page, two location blocks with photos in arch masks and parallax:
+Rajkot — LaVision Laminates, Tagore Road, Opp. Dharti Honda Service Center,
+Near Shantvan School, GIDC Udhyognagar, Bhakti Nagar, Rajkot 360002,
+☎ 094280 11654. Ahmedabad — FF-107, Olive Greens, Near Vodafone Tower, Near
+Gota Bridge, SG Highway, Gota, Ahmedabad 382481, ☎ 099798 71032. Each: address,
+click-to-call, hours placeholder, embedded map, "Get directions", and a
+handwritten "visit us!" doodle near the map.
+13.16  Contact
+Contact page: heading with a doodle, a form (name, company, city, phone,
+email, interest, message) with inline validation + confetti success; beside
+it both showroom addresses/phones and social links (Instagram, Facebook,
+LinkedIn, WhatsApp) as pastel pill icons. Reinforce wholesale/super-stockist,
+retail served via dealers. Organic shapes, wave divider, sky-pastel blobs.
+13.17  Catalogue Download
+Catalogue Download: PDF cards (per brand/category) as arch/pill shapes with a
+cover thumbnail, title, size, and a ripple "Download" button. Optional lead
+capture (name + phone) before download. Cards reveal staggered; a doodle
+arrow points to the newest catalogue.
+13.18  Footer
+Build the <Footer> on a sand-to-cream gradient with a wave divider on top.
+Brand block: logo + "More Than Most — One-Stop Solution for Interior
+Products", the 14yrs/500+/8+ line with tiny doodles, social pill icons, and a
+"Become a dealer" mini form (email + Join, ripple). Columns: Explore, Products
+(8), Brands (8), Showrooms (Rajkot + Ahmedabad addresses + phones). Bottom
+bar: "© 2026 LaVision Laminates." · Privacy · Terms · "Wholesale & Super
+Stockist — we do not sell directly to retail." A small handwritten sign-off.
+14. Performance & accessibility
+Backdrop-blur (glass) is GPU-heavy — use it only on the header and a couple of cards, not everywhere; test on mid-range phones.
+Lazy-mount the Three.js hero and WebGL gallery only when in view; static image fallback on mobile / low power.
+Respect prefers-reduced-motion everywhere: doodles show already-drawn, puzzle pieces appear in place, marquees pause, blobs stop morphing.
+Compress the 6720×4480 showroom photos to web sizes (WebP, ~1600px max); lazy-load; preload only the hero image.
+Keep text contrast strong: ink on cream is fine; avoid pastel text on pastel.
+Every interaction keyboard-reachable; visible focus ring (pink); alt text on all images; forms with labels + inline errors.
+15. Assets to prepare
+Logo in SVG (for crisp scaling and the header) plus the 8 sub-brand marks.
+Your 21 showroom photos, cropped and compressed to web sizes (already a great start).
+A short list of real customer quotes for the puzzle testimonials (name + role).
+Texture maps for the Virtual 3D room (base colour + roughness) — 8–12 finishes to begin.
+Catalogue PDFs per brand/category.
+Dealer list (city / area / phone) for the Find a Dealer page.
+Font files: Clash Display + General Sans (Fontshare), Shantell Sans (GitHub OFL), Geist Mono (Vercel) as WOFF2.
+In one line
+Warm “Sunlit Studio” pastels from your logo and showroom · Clash Display + General Sans + hand-drawn doodles (no Google Fonts) · glass header, puzzle-piece testimonials, wave dividers, blobs and a six-scene animated gallery · built with Framer Motion + GSAP + Three.js. Playful, flowing, and unmistakably yours — more than most.
