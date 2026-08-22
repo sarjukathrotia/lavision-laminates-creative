@@ -6,7 +6,10 @@ import {
 } from 'lucide-react';
 import { PRODUCT_CATEGORIES } from '../data/productsData';
 import { BRANDS } from '../data/brandsData';
+import StatsBand from '../components/home/StatsBand';
 import PuzzleTestimonials from '../components/home/PuzzleTestimonials';
+import Doodle from '../components/common/Doodle';
+import WaveDivider from '../components/common/WaveDivider';
 
 export default function Home() {
   const partners = [
@@ -20,9 +23,9 @@ export default function Home() {
   ];
 
   return (
-    <div className="space-y-20 pt-20 pb-16">
-      {/* 1. Hero Section (Light Animated SVG Wave Hero for v1) */}
-      <section className="relative min-h-[85vh] flex items-center justify-center px-4 md:px-8 py-16 overflow-hidden">
+    <div className="space-y-0 pt-20 pb-0">
+      {/* 1. Hero Section (Light Animated SVG Wave Hero) */}
+      <section className="relative min-h-[88vh] flex items-center justify-center px-4 md:px-8 py-16 overflow-hidden">
         {/* Background Soft Pastel Glow Blobs */}
         <div className="absolute top-1/4 left-10 w-96 h-96 bg-pinkP/60 rounded-full blur-3xl pointer-events-none -z-10 animate-blob-float" />
         <div className="absolute bottom-10 right-10 w-96 h-96 bg-skyP/60 rounded-full blur-3xl pointer-events-none -z-10 animate-blob-float" style={{ animationDelay: '3s' }} />
@@ -34,32 +37,38 @@ export default function Home() {
             MORE THAN MOST · GUJARAT SUPER-STOCKIST
           </div>
 
-          {/* Main Headline */}
+          {/* Main Headline with Animated Stroke Doodle Circle around "world" */}
           <h1 className="font-display text-5xl sm:text-7xl md:text-8xl font-semibold text-ink leading-[1.05] tracking-tight">
             One-stop{' '}
             <span className="relative inline-block text-pink font-display">
               world
-              {/* Hand-Drawn SVG Doodle Lasso around "world" */}
-              <svg className="absolute -inset-2 w-[115%] h-[125%] -left-[7%] pointer-events-none text-pink" viewBox="0 0 200 80" fill="none">
-                <path 
-                  d="M10 40 C 15 15, 100 5, 185 25 C 205 45, 175 75, 95 72 C 25 70, 5 50, 20 30 C 35 15, 90 20, 140 28" 
-                  stroke="currentColor" 
-                  strokeWidth="3.5" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round" 
-                />
-              </svg>
+              <Doodle 
+                type="circle" 
+                color="#E6329B" 
+                className="-inset-3 w-[125%] h-[135%] -left-[12%]" 
+                strokeWidth={3.5}
+                delay={0.3}
+              />
             </span>{' '}
             of surfaces.
           </h1>
 
-          {/* Subline with Squiggle underline */}
-          <p className="font-body text-lg md:text-2xl text-ink/80 max-w-2xl mx-auto leading-relaxed">
-            Decorative laminates, louvers, acrylic sheets, and engineered panels curated for Gujarat’s leading architects, dealers & builders.
-          </p>
+          {/* Subline with Squiggle Underline */}
+          <div className="relative inline-block max-w-2xl mx-auto">
+            <p className="font-body text-lg md:text-2xl text-ink/80 leading-relaxed">
+              Decorative laminates, louvers, acrylic sheets, and engineered panels curated for Gujarat’s leading architects, dealers & builders.
+            </p>
+            <Doodle 
+              type="squiggle" 
+              color="#1FA9E0" 
+              className="-bottom-3 left-1/4 w-1/2 h-4" 
+              strokeWidth={2.5}
+              delay={0.6}
+            />
+          </div>
 
           {/* CTAs */}
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+          <div className="flex flex-wrap items-center justify-center gap-4 pt-6">
             <Link
               to="/products"
               className="px-8 py-3.5 rounded-full bg-pink text-white font-body font-semibold text-sm hover:bg-pink/90 hover:shadow-glow-pink transition-all flex items-center gap-2 shadow-md hover:scale-105 active:scale-95"
@@ -80,44 +89,35 @@ export default function Home() {
           {/* Wholesale Disclaimer Badge */}
           <div className="pt-6 font-mono text-xs text-ink/60 flex items-center justify-center gap-2">
             <ShieldCheck className="w-4 h-4 text-lime" />
-            <span>Strictly Wholesale & Super-Stockist Distribution · No Retail</span>
+            <span>Strictly Wholesale & Super-Stockist Distribution · No Direct Retail</span>
           </div>
         </div>
       </section>
 
-      {/* 2. Stats Band with Sparkle Doodles */}
-      <section className="bg-sand/40 border-y border-sand py-12 px-4 md:px-8">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-          <div className="p-6 bg-cream/70 rounded-3xl border border-sand shadow-xs space-y-1">
-            <span className="font-mono text-xs text-pink uppercase font-semibold">Legacy & Experience</span>
-            <div className="font-display text-5xl md:text-6xl font-bold text-ink">14 Years</div>
-            <p className="font-body text-sm text-ink/75">Serving Gujarat’s interior ecosystem since 2012</p>
-          </div>
+      {/* Top Wave Divider into Stats Band */}
+      <WaveDivider fill="#EADFCB" className="opacity-60" />
 
-          <div className="p-6 bg-cream/70 rounded-3xl border border-sand shadow-xs space-y-1">
-            <span className="font-mono text-xs text-sky uppercase font-semibold">Distribution Strength</span>
-            <div className="font-display text-5xl md:text-6xl font-bold text-ink">500+</div>
-            <p className="font-body text-sm text-ink/75">Authorized wholesale dealers across all 33 districts</p>
-          </div>
+      {/* 2. Stats Band with Count-Up Numbers & Sparkle Doodles */}
+      <StatsBand />
 
-          <div className="p-6 bg-cream/70 rounded-3xl border border-sand shadow-xs space-y-1">
-            <span className="font-mono text-xs text-lime uppercase font-semibold">Product Portfolio</span>
-            <div className="font-display text-5xl md:text-6xl font-bold text-ink">8 Brands</div>
-            <p className="font-body text-sm text-ink/75">Over 1,200+ active surface and laminate decors in stock</p>
-          </div>
-        </div>
-      </section>
+      {/* Bottom Wave Divider from Stats Band */}
+      <WaveDivider fill="#FBF7F0" flip={true} className="opacity-90" />
 
       {/* 3. Product Arches (Showroom Architectural Niches) */}
-      <section className="max-w-7xl mx-auto px-4 md:px-8 space-y-10">
+      <section className="max-w-7xl mx-auto px-4 md:px-8 py-16 space-y-10">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div className="space-y-2">
             <div className="font-mono text-xs font-bold text-pink uppercase tracking-widest flex items-center gap-1.5">
               <Layers className="w-3.5 h-3.5 text-pink" />
-              NON-BOXY ARCHITECTURAL ARCHES
+              ARCHITECTURAL ARCHES
             </div>
             <h2 className="font-display text-3xl md:text-5xl font-semibold text-ink">
-              One-stop solutions for <span className="text-sky italic">every</span> surface.
+              One-stop solutions for{' '}
+              <span className="relative inline-block text-sky italic">
+                every
+                <Doodle type="circle" color="#1FA9E0" className="-inset-2 w-[120%] h-[130%]" strokeWidth={2.5} delay={0.2} />
+              </span>{' '}
+              surface.
             </h2>
           </div>
           <Link
@@ -170,7 +170,7 @@ export default function Home() {
       </section>
 
       {/* 4. Brands Marquee Strip */}
-      <section className="bg-sand/30 border-y border-sand py-12 overflow-hidden space-y-6">
+      <section className="bg-sand/30 border-y border-sand py-14 overflow-hidden space-y-6">
         <div className="max-w-6xl mx-auto px-4 text-center space-y-2">
           <div className="font-mono text-xs font-bold text-lime uppercase tracking-widest">
             OUR 8 SPECIALTY BRANDS
@@ -181,20 +181,22 @@ export default function Home() {
         </div>
 
         {/* Marquee Pill Chips */}
-        <div className="flex flex-wrap items-center justify-center gap-4 max-w-6xl mx-auto px-4">
-          {BRANDS.map((brand) => (
-            <Link
-              key={brand.slug}
-              to={`/brands/${brand.slug}`}
-              className={`px-5 py-3 rounded-full ${brand.bgColor} border border-ink/10 text-ink hover:scale-105 transition-all shadow-xs flex items-center gap-3 group`}
-            >
-              <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: brand.accentColor }} />
-              <div>
-                <div className="font-display text-sm font-semibold">{brand.name}</div>
-                <div className="font-mono text-[10px] text-ink/60">{brand.stats.designs} Decors</div>
-              </div>
-            </Link>
-          ))}
+        <div className="relative w-full overflow-hidden py-2 group">
+          <div className="flex gap-4 animate-marquee group-hover:[animation-play-state:paused] w-max">
+            {[...BRANDS, ...BRANDS].map((brand, idx) => (
+              <Link
+                key={`${brand.slug}-${idx}`}
+                to={`/brands/${brand.slug}`}
+                className={`px-5 py-3 rounded-full ${brand.bgColor} border border-ink/10 text-ink hover:scale-105 transition-all shadow-xs flex items-center gap-3`}
+              >
+                <div className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: brand.accentColor }} />
+                <div>
+                  <div className="font-display text-sm font-semibold">{brand.name}</div>
+                  <div className="font-mono text-[10px] text-ink/60">{brand.stats.designs} Decors</div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -202,7 +204,7 @@ export default function Home() {
       <PuzzleTestimonials />
 
       {/* 6. Who We Work With + Become a Dealer Magnetic CTA */}
-      <section className="max-w-6xl mx-auto px-4 md:px-8 space-y-12">
+      <section className="max-w-6xl mx-auto px-4 md:px-8 py-20 space-y-12">
         {/* Floating Partner Pills */}
         <div className="text-center space-y-4">
           <div className="font-mono text-xs font-bold text-sky uppercase tracking-widest">
@@ -223,7 +225,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Deep CTA Blob Box */}
+        {/* Deep CTA Blob Box with Doodle Arrow */}
         <div className="relative bg-ink text-cream p-8 md:p-14 rounded-3xl md:rounded-[48px] overflow-hidden shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8">
           <div className="space-y-4 max-w-xl">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lime/20 text-limeP font-mono text-xs font-semibold">
@@ -238,7 +240,12 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-4 flex-shrink-0">
+          <div className="relative flex flex-col sm:flex-row items-center gap-4 flex-shrink-0">
+            {/* Doodle Arrow pointing to Apply Now */}
+            <div className="absolute -top-10 -left-6 hidden md:block w-12 h-10">
+              <Doodle type="arrow" color="#9FB524" strokeWidth={2.5} />
+            </div>
+
             <Link
               to="/dealers/become"
               className="px-8 py-4 rounded-full bg-pink text-white font-body font-bold text-sm hover:bg-pink/90 hover:shadow-glow-pink transition-all shadow-lg flex items-center gap-2 hover:scale-105 active:scale-95"
@@ -255,6 +262,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Bottom Wave Divider into Footer */}
+      <WaveDivider fill="#EADFCB" className="opacity-40" />
     </div>
   );
 }
