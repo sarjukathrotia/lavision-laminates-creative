@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
 import { Sparkles, ShieldCheck, CheckCircle2, ArrowRight, Truck, Award, Percent, Layers } from 'lucide-react';
+import Doodle from '../components/common/Doodle';
 
 export default function BecomeDealer() {
   const [formData, setFormData] = useState({
@@ -24,13 +25,12 @@ export default function BecomeDealer() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setSubmitted(true);
-    // Trigger Magic UI / canvas-confetti celebration
     try {
       confetti({
         particleCount: 100,
         spread: 70,
         origin: { y: 0.6 },
-        colors: ['#E6329B', '#1FA9E0', '#9FB524', '#FBD9EC', '#D6EEF9']
+        colors: ['#E6329B', '#1FA9E0', '#9FB524', '#2A2724']
       });
     } catch (err) {
       console.log('Confetti triggered');
@@ -38,154 +38,151 @@ export default function BecomeDealer() {
   };
 
   return (
-    <div className="pt-28 pb-20 px-4 md:px-8 max-w-7xl mx-auto space-y-16">
-      {/* Header */}
-      <section className="text-center max-w-3xl mx-auto space-y-4">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pinkP text-ink font-mono text-xs font-semibold uppercase tracking-widest">
+    <div className="pt-24 pb-24 px-4 md:px-8 max-w-7xl mx-auto space-y-24">
+      {/* 1. Header with Oversized Asymmetric Headline */}
+      <section className="max-w-4xl space-y-6">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sand/60 border border-sand text-ink font-mono text-xs font-semibold uppercase tracking-widest">
           <Sparkles className="w-3.5 h-3.5 text-pink" />
-          BECOME AN AUTHORIZED DEALER
+          AUTHORIZATION APPLICATION · GUJARAT NETWORK
         </div>
 
-        <h1 className="font-display text-4xl sm:text-6xl font-semibold text-ink leading-tight">
-          More opportunities for <span className="text-pink italic">our dealers</span>.
+        <h1 className="font-display text-5xl sm:text-7xl md:text-8xl font-semibold text-ink leading-[1.04] tracking-tight">
+          More opportunity for{' '}
+          <span className="relative inline-block text-pink font-display italic">
+            our dealers
+            <Doodle type="circle" color="#E6329B" className="-inset-3 w-[120%] h-[130%]" strokeWidth={3} />
+          </span>.
         </h1>
 
-        <p className="font-body text-base md:text-lg text-ink/80 leading-relaxed">
+        <p className="font-body text-lg md:text-2xl text-ink/80 leading-relaxed font-light max-w-2xl">
           Join Gujarat’s fastest-growing surface distribution network. Gain exclusive access to 8 brand lines, comprehensive physical sample kits, and direct super-stockist inventory backup.
         </p>
       </section>
 
-      {/* 4 Dealer Advantage Cards */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+      {/* 2. 4 Dealer Advantage Cards (Clean Cream/Ink with 2px Left Accent Edge) */}
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
         {perks.map((p, idx) => {
           const Icon = p.icon;
           return (
             <div
               key={idx}
-              className="p-6 rounded-3xl bg-sand/30 border border-sand space-y-3 shadow-xs"
+              className="relative p-8 rounded-3xl bg-cream border border-sand shadow-xs hover:shadow-md transition-all space-y-4 flex flex-col justify-between"
             >
-              <div className="w-10 h-10 rounded-2xl bg-cream border border-sand flex items-center justify-center text-pink shadow-xs">
-                <Icon className="w-5 h-5" />
+              <div className="w-12 h-12 rounded-2xl bg-sand/40 flex items-center justify-center text-pink">
+                <Icon className="w-6 h-6" />
               </div>
-              <h3 className="font-display text-lg font-semibold text-ink">{p.title}</h3>
-              <p className="font-body text-xs text-ink/75 leading-relaxed">{p.desc}</p>
+              <div className="space-y-2">
+                <h3 className="font-display text-xl font-bold text-ink">{p.title}</h3>
+                <p className="font-body text-xs text-ink/75 leading-relaxed font-light">{p.desc}</p>
+              </div>
+              <span className="font-mono text-[10px] text-ink/40">Benefit 0{idx + 1}</span>
             </div>
           );
         })}
       </section>
 
-      {/* Application Form & Value Pitch */}
-      <section className="max-w-4xl mx-auto bg-cream border border-sand rounded-3xl md:rounded-[40px] p-6 md:p-12 shadow-sm">
+      {/* 3. Dealership Application Form Section */}
+      <section className="max-w-4xl mx-auto bg-cream border border-sand rounded-3xl md:rounded-[48px] p-8 md:p-14 shadow-md space-y-8">
+        <div className="space-y-2">
+          <h2 className="font-display text-3xl md:text-4xl font-semibold text-ink">
+            Submit your trade application
+          </h2>
+          <p className="font-body text-sm text-ink/70">
+            Our trade desk will review your business credentials and schedule an introductory sample folder handover.
+          </p>
+        </div>
+
         {submitted ? (
-          <div className="text-center py-12 space-y-4">
-            <div className="w-16 h-16 rounded-full bg-limeP border border-lime/30 text-lime flex items-center justify-center mx-auto shadow-sm">
+          <div className="p-8 rounded-3xl bg-sand/30 border border-sand text-center space-y-4 animate-in fade-in">
+            <div className="w-16 h-16 rounded-full bg-lime/20 text-lime flex items-center justify-center mx-auto">
               <CheckCircle2 className="w-8 h-8" />
             </div>
-            <h2 className="font-display text-3xl font-bold text-ink">Application Submitted Successfully!</h2>
-            <p className="font-body text-base text-ink/80 max-w-md mx-auto">
-              Thank you for applying to become a LaVision dealer partner. Our Gujarat wholesale territory manager will contact you within 24 hours.
+            <h3 className="font-display text-2xl font-bold text-ink">
+              Application Received!
+            </h3>
+            <p className="font-body text-sm text-ink/80 max-w-md mx-auto leading-relaxed">
+              Thank you for applying to become an authorized LaVision dealer. Our Gujarat trade team will contact you within 24 business hours.
             </p>
-            <div className="font-mono text-xs text-ink/60 pt-4">
-              Need immediate assistance? Call our Rajkot desk: <strong className="text-pink">094280 11654</strong>
-            </div>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="border-b border-sand pb-4 space-y-1">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-ink">Dealer Partnership Application</h2>
-              <p className="font-body text-xs text-ink/70">Please fill in your business details. All fields are confidential.</p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 font-body text-xs">
-              <div className="space-y-1.5">
-                <label className="font-mono font-semibold text-ink/80">Business / Firm Name *</label>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="font-mono text-xs font-semibold text-ink">Firm / Showroom Name *</label>
                 <input
-                  type="text"
                   required
+                  type="text"
                   placeholder="e.g. Royal Timber & Surfaces"
                   value={formData.businessName}
                   onChange={(e) => setFormData({ ...formData, businessName: e.target.value })}
-                  className="w-full px-4 py-3 rounded-2xl bg-white border border-sand focus:outline-none focus:border-pink text-ink"
+                  className="w-full px-4 py-3 rounded-2xl bg-sand/30 border border-sand focus:outline-none focus:border-pink font-body text-sm text-ink"
                 />
               </div>
 
-              <div className="space-y-1.5">
-                <label className="font-mono font-semibold text-ink/80">Contact Person Name *</label>
+              <div className="space-y-2">
+                <label className="font-mono text-xs font-semibold text-ink">Contact Person *</label>
                 <input
-                  type="text"
                   required
-                  placeholder="e.g. Rajeshbhai Patel"
+                  type="text"
+                  placeholder="e.g. Rajesh Shah"
                   value={formData.contactPerson}
                   onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
-                  className="w-full px-4 py-3 rounded-2xl bg-white border border-sand focus:outline-none focus:border-pink text-ink"
+                  className="w-full px-4 py-3 rounded-2xl bg-sand/30 border border-sand focus:outline-none focus:border-pink font-body text-sm text-ink"
                 />
               </div>
 
-              <div className="space-y-1.5">
-                <label className="font-mono font-semibold text-ink/80">City / District in Gujarat *</label>
+              <div className="space-y-2">
+                <label className="font-mono text-xs font-semibold text-ink">City / District (Gujarat) *</label>
                 <input
-                  type="text"
                   required
-                  placeholder="e.g. Rajkot, Surat, Morbi, Ahmedabad"
+                  type="text"
+                  placeholder="e.g. Rajkot, Surat, Ahmedabad"
                   value={formData.city}
                   onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                  className="w-full px-4 py-3 rounded-2xl bg-white border border-sand focus:outline-none focus:border-pink text-ink"
+                  className="w-full px-4 py-3 rounded-2xl bg-sand/30 border border-sand focus:outline-none focus:border-pink font-body text-sm text-ink"
                 />
               </div>
 
-              <div className="space-y-1.5">
-                <label className="font-mono font-semibold text-ink/80">Mobile / WhatsApp Number *</label>
+              <div className="space-y-2">
+                <label className="font-mono text-xs font-semibold text-ink">Contact Number *</label>
                 <input
-                  type="tel"
                   required
-                  placeholder="e.g. 098250 12345"
+                  type="tel"
+                  placeholder="e.g. 098250 XXXXX"
                   value={formData.phone}
                   onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  className="w-full px-4 py-3 rounded-2xl bg-white border border-sand focus:outline-none focus:border-pink text-ink"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="font-mono font-semibold text-ink/80">Business Email Address *</label>
-                <input
-                  type="email"
-                  required
-                  placeholder="e.g. contact@royaltimber.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full px-4 py-3 rounded-2xl bg-white border border-sand focus:outline-none focus:border-pink text-ink"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="font-mono font-semibold text-ink/80">Current Product Lines Handled</label>
-                <input
-                  type="text"
-                  placeholder="e.g. Plywood, Hardware, Laminates"
-                  value={formData.currentLines}
-                  onChange={(e) => setFormData({ ...formData, currentLines: e.target.value })}
-                  className="w-full px-4 py-3 rounded-2xl bg-white border border-sand focus:outline-none focus:border-pink text-ink"
+                  className="w-full px-4 py-3 rounded-2xl bg-sand/30 border border-sand focus:outline-none focus:border-pink font-body text-sm text-ink"
                 />
               </div>
             </div>
 
-            <div className="space-y-1.5 font-body text-xs">
-              <label className="font-mono font-semibold text-ink/80">Any Specific Brands or Requirements?</label>
+            <div className="space-y-2">
+              <label className="font-mono text-xs font-semibold text-ink">Current Product Lines Handled</label>
+              <input
+                type="text"
+                placeholder="e.g. Decorative Laminates, Plywood, Hardware, Louvers"
+                value={formData.currentLines}
+                onChange={(e) => setFormData({ ...formData, currentLines: e.target.value })}
+                className="w-full px-4 py-3 rounded-2xl bg-sand/30 border border-sand focus:outline-none focus:border-pink font-body text-sm text-ink"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="font-mono text-xs font-semibold text-ink">Message or Inquiries</label>
               <textarea
-                rows="3"
-                placeholder="Tell us about your showroom size, monthly volume expectations, or preferred product lines..."
+                rows={3}
+                placeholder="Tell us about your showroom display capacity and monthly requirements..."
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="w-full px-4 py-3 rounded-2xl bg-white border border-sand focus:outline-none focus:border-pink text-ink"
-              ></textarea>
+                className="w-full px-4 py-3 rounded-2xl bg-sand/30 border border-sand focus:outline-none focus:border-pink font-body text-sm text-ink resize-none"
+              />
             </div>
 
             <button
               type="submit"
-              className="w-full py-4 rounded-full bg-pink text-white font-body font-bold text-sm hover:bg-pink/90 hover:shadow-glow-pink transition-all shadow-md flex items-center justify-center gap-2"
+              className="w-full py-4 rounded-full bg-pink text-white font-body font-bold text-sm hover:bg-pink/90 hover:shadow-glow-pink transition-all shadow-md active:scale-98"
             >
-              <span>Submit Dealership Application</span>
-              <ArrowRight className="w-4 h-4" />
+              Submit Application & Request Folder Kit
             </button>
           </form>
         )}
