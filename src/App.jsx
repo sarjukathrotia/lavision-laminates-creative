@@ -25,7 +25,11 @@ import CatalogueDownload from './pages/CatalogueDownload';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 
+import { useLenis } from './hooks/useLenis';
+
 export default function App() {
+  useLenis();
+
   return (
     <BrowserRouter>
       <ScrollToTop />
