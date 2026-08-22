@@ -57,10 +57,15 @@ export default {
         },
         'beam': {
           '100%': { 'offset-distance': '100%' },
+        },
+        'marquee': {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-50%)' },
         }
       },
       animation: {
         'blob-float': 'blob-float 10s ease-in-out infinite',
+        'marquee': 'marquee 30s linear infinite',
       }
     },
   },
