@@ -1,345 +1,140 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { 
-  Sparkles, Eye, Filter, ArrowRight, Move, 
-  Layers, Maximize2, X, RefreshCw, CheckCircle2 
-} from 'lucide-react';
+import { X, ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
-gsap.registerPlugin(ScrollTrigger);
+/**
+ * GALLERY — Luxury Showroom Lookbook (Prada / Celine standard).
+ * 
+ * 1. Masthead: Oversized light Zodiak title on bone paper.
+ * 2. Minimal text category filter.
+ * 3. 21 Showroom photographs arranged in an asymmetric editorial rhythm.
+ * 4. Tiny tracked captions beneath each plate.
+ * 5. Minimal full-screen lightbox viewer in noir.
+ */
 
-// 21 Showroom Photos Master Registry
 const ALL_PHOTOS = [
-  { id: 1, src: '/images/showroom/CKGL4305.webp', title: 'Curved Reception Counter & Arched Niches', category: 'Showroom', tags: ['Arches', 'Woodgrain'] },
-  { id: 2, src: '/images/showroom/CKGL4306.webp', title: 'Organic Mirror & Architectural Louver Wall', category: 'Showroom', tags: ['Mirror', 'Louvers'] },
-  { id: 3, src: '/images/showroom/CKGL4307.webp', title: 'High-Density Pre-Laminated MDF Boards', category: 'Commercial', tags: ['MDF', 'Panels'] },
-  { id: 4, src: '/images/showroom/CKGL4308.webp', title: 'Charcoal Composite Fluted Louvers', category: 'Residential', tags: ['Louvers', 'Wall Accent'] },
-  { id: 5, src: '/images/showroom/CKGL4309.webp', title: 'Lime Accent Seating & Swatch Consultation', category: 'Showroom', tags: ['Showroom', 'Design Desk'] },
-  { id: 6, src: '/images/showroom/CKGL4310.webp', title: 'Luxury Villa Wall Paneling & Soft Accents', category: 'Residential', tags: ['Villa', 'Living Room'] },
-  { id: 7, src: '/images/showroom/CKGL4311.webp', title: 'Rajkot Flagship Experience Center Display', category: 'Showroom', tags: ['Flagship', 'Central Hub'] },
-  { id: 8, src: '/images/showroom/CKGL4312.webp', title: 'Exact-Match PVC Edge Bands & Trims', category: 'Materials', tags: ['Edge Bands', 'Hardware'] },
-  { id: 9, src: '/images/showroom/CKGL4314.webp', title: 'Corporate Meeting Room Carved Wood Walls', category: 'Commercial', tags: ['Corporate', 'Acoustic'] },
-  { id: 10, src: '/images/showroom/CKGL4315.webp', title: 'Ahmedabad Gota Showroom Consultation Area', category: 'Showroom', tags: ['Ahmedabad', 'Gallery'] },
-  { id: 11, src: '/images/showroom/CKGL4317.webp', title: 'Full-Scale Sample Board Displays', category: 'Showroom', tags: ['Sample Board', '1:1 Scale'] },
-  { id: 12, src: '/images/showroom/CKGL4319.webp', title: 'Calibrated Hardwood Plywood Substrates', category: 'Commercial', tags: ['Plywood', 'Marine Grade'] },
-  { id: 13, src: '/images/showroom/CKGL4320.webp', title: 'Curved Island Wrapped in Thermoform Polymer', category: 'Residential', tags: ['Polymer', 'Curved Tech'] },
-  { id: 14, src: '/images/showroom/CKGL4321.webp', title: 'Synchronized European Oak Grain Panels', category: 'Residential', tags: ['Oak Grain', 'Laminates'] },
-  { id: 15, src: '/images/showroom/CKGL4322.webp', title: 'Ultra High Gloss 6H Acrylic Facades', category: 'Residential', tags: ['Acrylic', 'Mirror Gloss'] },
-  { id: 16, src: '/images/showroom/CKGL4325.webp', title: 'Hospitality Suite Wall Cladding', category: 'Commercial', tags: ['Hospitality', 'Resort'] },
-  { id: 17, src: '/images/showroom/CKGL4326.webp', title: 'Quad-Press Marine Grade Plywood Lots', category: 'Materials', tags: ['Marine Ply', 'IS:710'] },
-  { id: 18, src: '/images/showroom/CKGL4327.webp', title: 'Duplex Penthouse Living Room Textures', category: 'Residential', tags: ['Penthouse', 'Luxury'] },
-  { id: 19, src: '/images/showroom/CKGL4328.webp', title: 'Artisanal Natural Woven Rattan Webbing', category: 'Materials', tags: ['Cane Webbing', 'Rattan'] },
-  { id: 20, src: '/images/showroom/CKGL4335.webp', title: 'Vibrant Jewel Acrylic Finish Swatches', category: 'Materials', tags: ['Acrylic Color', 'Super Gloss'] },
-  { id: 21, src: '/images/showroom/CKGL4340.webp', title: 'Showroom Central Material Library', category: 'Showroom', tags: ['Material Library', 'Shade Cards'] }
+  { id: 1, src: '/images/showroom/CKGL4311.webp', title: 'Flagship Experience Center Display', location: 'Rajkot Central Hub', category: 'Showroom', layout: 'hero' },
+  { id: 2, src: '/images/showroom/CKGL4305.webp', title: 'Curved Reception Counter & Arched Niches', location: 'Tagore Road Studio', category: 'Showroom', layout: 'half' },
+  { id: 3, src: '/images/showroom/CKGL4306.webp', title: 'Organic Mirror & Architectural Louver Wall', location: 'Design Consultation Suite', category: 'Showroom', layout: 'half' },
+  { id: 4, src: '/images/showroom/CKGL4315.webp', title: 'Ahmedabad Gota Showroom Consultation Area', location: 'SG Highway Studio', category: 'Showroom', layout: 'hero' },
+  { id: 5, src: '/images/showroom/CKGL4314.webp', title: 'Corporate Meeting Room Carved Wood Walls', location: 'Commercial Pavilion', category: 'Commercial', layout: 'third' },
+  { id: 6, src: '/images/showroom/CKGL4307.webp', title: 'High-Density Pre-Laminated MDF Boards', location: 'Substrate Archive', category: 'Commercial', layout: 'third' },
+  { id: 7, src: '/images/showroom/CKGL4308.webp', title: 'Charcoal Composite Fluted Louvers', location: 'Residential Suite', category: 'Residential', layout: 'third' },
+  { id: 8, src: '/images/showroom/CKGL4340.webp', title: 'Central Surface & Material Library', location: 'Flagship Library', category: 'Showroom', layout: 'hero' },
+  { id: 9, src: '/images/showroom/CKGL4309.webp', title: 'Swatch Consultation & Sample Swatch Bench', location: 'Architectural Desk', category: 'Showroom', layout: 'half' },
+  { id: 10, src: '/images/showroom/CKGL4310.webp', title: 'Luxury Villa Wall Paneling & Soft Accents', location: 'Villa Suite', category: 'Residential', layout: 'half' },
+  { id: 11, src: '/images/showroom/CKGL4312.webp', title: 'Exact-Match PVC Edge Bands & Trims', location: 'Hardware Archive', category: 'Materials', layout: 'third' },
+  { id: 12, src: '/images/showroom/CKGL4317.webp', title: 'Full-Scale 1:1 Sample Board Displays', location: 'Material Gallery', category: 'Showroom', layout: 'third' },
+  { id: 13, src: '/images/showroom/CKGL4319.webp', title: 'Calibrated Hardwood Plywood Substrates', location: 'Technical Core', category: 'Materials', layout: 'third' },
+  { id: 14, src: '/images/showroom/CKGL4320.webp', title: 'Curved Island Wrapped in Thermoform Polymer', location: 'Residential Lab', category: 'Residential', layout: 'half' },
+  { id: 15, src: '/images/showroom/CKGL4321.webp', title: 'Synchronized European Oak Grain Panels', location: 'Timber Line', category: 'Residential', layout: 'half' },
+  { id: 16, src: '/images/showroom/CKGL4322.webp', title: 'Ultra High Gloss 6H Acrylic Facades', location: 'Optical Crystal Series', category: 'Materials', layout: 'hero' },
+  { id: 17, src: '/images/showroom/CKGL4325.webp', title: 'Hospitality Suite Wall Cladding', location: 'Commercial Showcase', category: 'Commercial', layout: 'third' },
+  { id: 18, src: '/images/showroom/CKGL4326.webp', title: 'Quad-Press Marine Grade Plywood Lots', location: 'Warehouse Reserve', category: 'Materials', layout: 'third' },
+  { id: 19, src: '/images/showroom/CKGL4327.webp', title: 'Duplex Penthouse Living Room Textures', location: 'Residential Suite', category: 'Residential', layout: 'third' },
+  { id: 20, src: '/images/showroom/CKGL4328.webp', title: 'Artisanal Natural Woven Rattan Webbing', location: 'Organic Surfaces', category: 'Materials', layout: 'half' },
+  { id: 21, src: '/images/showroom/CKGL4335.webp', title: 'Vibrant Jewel Acrylic Finish Swatches', location: 'Acrylic Laboratory', category: 'Materials', layout: 'half' }
 ];
+
+const CATEGORIES = ['ALL', 'SHOWROOM', 'RESIDENTIAL', 'COMMERCIAL', 'MATERIALS'];
 
 export default function Gallery() {
   const [selectedPhoto, setSelectedPhoto] = useState(null);
-  const [filterCategory, setFilterCategory] = useState('All');
-  const stickyStackRef = useRef(null);
-  const stackCardsRef = useRef([]);
+  const [filterCategory, setFilterCategory] = useState('ALL');
 
-  // Scene 4: GSAP Pinned Sticky Stack
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion || !stickyStackRef.current) return;
-
-    const ctx = gsap.context(() => {
-      const cards = stackCardsRef.current;
-      if (!cards || cards.length === 0) return;
-
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: stickyStackRef.current,
-          start: 'top top',
-          end: '+=1400',
-          pin: true,
-          scrub: 0.6,
-          anticipatePin: 1
-        }
-      });
-
-      // Stack card 2 over card 1
-      tl.to(cards[1], {
-        yPercent: 0,
-        opacity: 1,
-        scale: 1,
-        rotation: 0,
-        duration: 1,
-        ease: 'power2.out'
-      }, 0.2);
-
-      // Stack card 3 over card 2
-      tl.to(cards[2], {
-        yPercent: 0,
-        opacity: 1,
-        scale: 1,
-        rotation: 0,
-        duration: 1,
-        ease: 'power2.out'
-      }, 0.6);
-    }, stickyStackRef);
-
-    return () => ctx.revert();
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') setSelectedPhoto(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
 
-  const categories = ['All', 'Showroom', 'Residential', 'Commercial', 'Materials'];
-
-  const filteredPhotos = filterCategory === 'All'
+  const filteredPhotos = filterCategory === 'ALL'
     ? ALL_PHOTOS
-    : ALL_PHOTOS.filter((p) => p.category === filterCategory);
-
-  // Grouped scenes data
-  const scene1Photos = [ALL_PHOTOS[6], ALL_PHOTOS[0], ALL_PHOTOS[1], ALL_PHOTOS[4]]; // 4 Arch Hero images
-  const scene2Photos = [ALL_PHOTOS[3], ALL_PHOTOS[7], ALL_PHOTOS[9], ALL_PHOTOS[10], ALL_PHOTOS[13]]; // 5 Marquee images
-  const scene3Photos = [ALL_PHOTOS[12], ALL_PHOTOS[14], ALL_PHOTOS[19]]; // 3 Hover distortion tiles
-  const scene4Photos = [ALL_PHOTOS[16], ALL_PHOTOS[11], ALL_PHOTOS[2]]; // 3 Sticky stack images
-  const scene5Photos = [ALL_PHOTOS[5], ALL_PHOTOS[8], ALL_PHOTOS[15], ALL_PHOTOS[17]]; // 4 Draggable scatter polaroids
+    : ALL_PHOTOS.filter((p) => p.category.toUpperCase() === filterCategory);
 
   return (
-    <div className="pt-28 pb-24 px-4 md:px-8 max-w-7xl mx-auto space-y-28">
-      {/* Header Intro */}
-      <section className="text-center max-w-3xl mx-auto space-y-4">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pinkP text-ink font-mono text-xs font-semibold uppercase tracking-widest">
-          <Sparkles className="w-3.5 h-3.5 text-pink" />
-          SIX ANIMATION SCENES · 21 SHOWROOM PHOTOS
+    <div className="bg-paper text-ink selection:bg-ink selection:text-paper pt-36 md:pt-48 pb-28 md:pb-40">
+      
+      {/* ============================ 1. MASTHEAD ============================ */}
+      <section className="max-w-7xl mx-auto px-6 md:px-12 pb-16 md:pb-24">
+        <div className="grid md:grid-cols-12 gap-8 items-end">
+          <div className="md:col-span-8">
+            <p className="font-body text-[11px] tracking-[0.25em] uppercase text-graphite mb-6">
+              SHOWROOM ARCHIVE · TWENTY-ONE PERSPECTIVES
+            </p>
+            <h1 className="font-serif font-light leading-[0.92] tracking-[-0.03em] text-ink text-[14vw] md:text-[8rem] lg:text-[9.5rem]">
+              The showroom<br />
+              <span className="italic font-normal">lookbook</span>.
+            </h1>
+          </div>
+          <div className="md:col-span-4 md:pb-4">
+            <p className="font-body text-base md:text-lg text-graphite font-light leading-relaxed max-w-sm">
+              Visual archives from our Rajkot and Ahmedabad material experience centers, showcasing installations and full-scale shade studies.
+            </p>
+          </div>
         </div>
-
-        <h1 className="font-display text-4xl sm:text-6xl md:text-7xl font-semibold text-ink leading-tight">
-          A gallery full of <span className="text-sky italic font-display">motion</span>.
-        </h1>
-
-        <p className="font-body text-base md:text-lg text-ink/80 leading-relaxed">
-          Experience our physical Rajkot & Ahmedabad experience centers through six dynamic interaction styles — arched reveals, infinite flow, distortion grids, sticky stacks, physics drag, and animated flip filters.
-        </p>
       </section>
 
-      {/* =========================================================================
-          SCENE 1: ARCHED HERO ROW (Scale + Un-blur on Scroll Enter)
-          ========================================================================= */}
-      <section className="space-y-6">
-        <div className="flex items-center justify-between border-b border-sand pb-3">
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-pinkP text-pink">
-              Scene 01
-            </span>
-            <h2 className="font-display text-2xl font-semibold text-ink">Arched Hero Row</h2>
-          </div>
-          <span className="font-mono text-xs text-ink/60 hidden sm:inline">Scale + Un-blur Reveal</span>
-        </div>
+      {/* Hairline Divider */}
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <div className="h-px bg-line" />
+      </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {scene1Photos.map((photo, idx) => (
-            <motion.div
-              key={photo.id}
-              initial={{ scale: 0.88, filter: 'blur(10px)', opacity: 0 }}
-              whileInView={{ scale: 1, filter: 'blur(0px)', opacity: 1 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.7, delay: idx * 0.15, ease: [0.16, 1, 0.3, 1] }}
-              onClick={() => setSelectedPhoto(photo)}
-              className="group cursor-pointer bg-sand/30 rounded-arch p-4 border border-sand hover:border-pink/50 hover:shadow-glow-pink transition-all"
+      {/* ============================ 2. CATEGORY FILTER ============================ */}
+      <section className="max-w-7xl mx-auto px-6 md:px-12 py-10 md:py-12">
+        <div className="flex flex-wrap items-center gap-8 font-body text-xs tracking-[0.2em] uppercase text-graphite">
+          {CATEGORIES.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setFilterCategory(cat)}
+              className={`transition-colors pb-1 ${
+                filterCategory === cat
+                  ? 'text-ink font-medium border-b border-ink'
+                  : 'hover:text-ink'
+              }`}
             >
-              <div className="relative aspect-[4/5] rounded-arch-sm overflow-hidden bg-sand mb-3">
-                <img
-                  src={photo.src}
-                  alt={photo.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <span className="absolute top-3 right-3 font-mono text-[10px] font-semibold px-2 py-0.5 rounded-full bg-cream/90 text-ink">
-                  {photo.category}
-                </span>
-              </div>
-              <h3 className="font-display text-sm font-semibold text-ink group-hover:text-pink line-clamp-1">
-                {photo.title}
-              </h3>
-            </motion.div>
+              {cat}
+            </button>
           ))}
         </div>
       </section>
 
-      {/* =========================================================================
-          SCENE 2: INFINITE SIDE-SCROLLING MARQUEE (Slows on Hover)
-          ========================================================================= */}
-      <section className="space-y-6 overflow-hidden">
-        <div className="flex items-center justify-between border-b border-sand pb-3">
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-skyP text-sky">
-              Scene 02
-            </span>
-            <h2 className="font-display text-2xl font-semibold text-ink">Infinite Side-Scrolling Marquee</h2>
-          </div>
-          <span className="font-mono text-xs text-ink/60 hidden sm:inline">Magic UI Style · Hover to Pause</span>
-        </div>
-
-        <div className="relative w-full overflow-hidden py-4 group">
-          {/* Track 1 */}
-          <div className="flex gap-6 animate-marquee group-hover:[animation-play-state:paused] w-max">
-            {[...scene2Photos, ...scene2Photos].map((photo, idx) => (
-              <div
-                key={`${photo.id}-${idx}`}
-                onClick={() => setSelectedPhoto(photo)}
-                className="w-72 sm:w-80 flex-shrink-0 cursor-pointer rounded-3xl overflow-hidden bg-cream border border-sand p-3 shadow-sm hover:shadow-md transition-all group/card"
-              >
-                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden bg-sand mb-2.5">
-                  <img
-                    src={photo.src}
-                    alt={photo.title}
-                    className="w-full h-full object-cover group-hover/card:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="flex items-center justify-between font-mono text-[11px] text-ink/70">
-                  <span className="font-display font-semibold text-xs text-ink truncate pr-2">{photo.title}</span>
-                  <span className="text-pink font-semibold">{photo.category}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          SCENE 3: CSS/FRAMER HOVER DISTORTION & RIPPLE TILES
-          ========================================================================= */}
-      <section className="space-y-6">
-        <div className="flex items-center justify-between border-b border-sand pb-3">
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-limeP text-lime">
-              Scene 03
-            </span>
-            <h2 className="font-display text-2xl font-semibold text-ink">Tactile Hover Distortion Grid</h2>
-          </div>
-          <span className="font-mono text-xs text-ink/60 hidden sm:inline">Smooth Kinetic Micro-Tilts</span>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {scene3Photos.map((photo) => (
-            <motion.div
-              key={photo.id}
-              whileHover={{ scale: 1.03, rotateZ: -1 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-              onClick={() => setSelectedPhoto(photo)}
-              className="group relative cursor-pointer rounded-3xl md:rounded-[40px] overflow-hidden bg-sand border border-sand shadow-sm hover:shadow-xl transition-all aspect-[4/3]"
-            >
-              <img
-                src={photo.src}
-                alt={photo.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 group-hover:brightness-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent p-6 flex flex-col justify-end text-cream">
-                <span className="font-mono text-[10px] text-lime uppercase font-semibold">{photo.category}</span>
-                <h3 className="font-display text-lg font-semibold">{photo.title}</h3>
-                <span className="font-body text-xs text-sand/80 pt-1 flex items-center gap-1">
-                  Click to inspect texture <ArrowRight className="w-3 h-3" />
-                </span>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* =========================================================================
-          SCENE 4: PINNED STICKY STACK (GSAP Pin & Scroll Swap)
-          ========================================================================= */}
-      <section 
-        ref={stickyStackRef}
-        className="relative min-h-screen bg-sand/20 rounded-3xl md:rounded-[48px] p-6 md:p-12 border border-sand flex flex-col items-center justify-center overflow-hidden"
-      >
-        <div className="text-center space-y-2 mb-8 max-w-xl">
-          <span className="font-mono text-xs font-bold px-3 py-1 rounded-full bg-cream text-pink border border-sand">
-            Scene 04 · GSAP Pinned Sticky Stack
-          </span>
-          <h2 className="font-display text-3xl md:text-4xl font-semibold text-ink">
-            Layered Substrates & Cores
-          </h2>
-          <p className="font-body text-xs md:text-sm text-ink/75">
-            Scroll down to watch structural marine plywood, calibrated cores, and architectural mirrors stack seamlessly.
-          </p>
-        </div>
-
-        {/* Stack Container */}
-        <div className="relative w-full max-w-2xl h-[340px] md:h-[400px]">
-          {/* Card 1 (Base) */}
-          <div
-            ref={(el) => (stackCardsRef.current[0] = el)}
-            className="absolute inset-0 rounded-3xl overflow-hidden bg-cream border-2 border-sand shadow-md p-4 flex flex-col justify-between"
-          >
-            <div className="relative w-full h-[80%] rounded-2xl overflow-hidden bg-sand">
-              <img src={scene4Photos[0].src} alt={scene4Photos[0].title} className="w-full h-full object-cover" />
-            </div>
-            <div className="flex items-center justify-between font-mono text-xs text-ink">
-              <span className="font-display font-semibold text-sm">{scene4Photos[0].title}</span>
-              <span className="px-2 py-0.5 rounded-full bg-pinkP text-pink text-[10px]">Layer 01</span>
-            </div>
-          </div>
-
-          {/* Card 2 */}
-          <div
-            ref={(el) => (stackCardsRef.current[1] = el)}
-            className="absolute inset-0 rounded-3xl overflow-hidden bg-cream border-2 border-sky/30 shadow-lg p-4 flex flex-col justify-between opacity-0 translate-y-24 rotate-3"
-          >
-            <div className="relative w-full h-[80%] rounded-2xl overflow-hidden bg-sand">
-              <img src={scene4Photos[1].src} alt={scene4Photos[1].title} className="w-full h-full object-cover" />
-            </div>
-            <div className="flex items-center justify-between font-mono text-xs text-ink">
-              <span className="font-display font-semibold text-sm">{scene4Photos[1].title}</span>
-              <span className="px-2 py-0.5 rounded-full bg-skyP text-sky text-[10px]">Layer 02</span>
-            </div>
-          </div>
-
-          {/* Card 3 */}
-          <div
-            ref={(el) => (stackCardsRef.current[2] = el)}
-            className="absolute inset-0 rounded-3xl overflow-hidden bg-cream border-2 border-lime/30 shadow-2xl p-4 flex flex-col justify-between opacity-0 translate-y-36 -rotate-3"
-          >
-            <div className="relative w-full h-[80%] rounded-2xl overflow-hidden bg-sand">
-              <img src={scene4Photos[2].src} alt={scene4Photos[2].title} className="w-full h-full object-cover" />
-            </div>
-            <div className="flex items-center justify-between font-mono text-xs text-ink">
-              <span className="font-display font-semibold text-sm">{scene4Photos[2].title}</span>
-              <span className="px-2 py-0.5 rounded-full bg-limeP text-lime text-[10px]">Layer 03</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================================
-          SCENE 5: DRAGGABLE SCATTERED POLAROIDS (Framer Motion Physics Drag)
-          ========================================================================= */}
-      <section className="space-y-6">
-        <div className="flex items-center justify-between border-b border-sand pb-3">
-          <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-peachP text-ink">
-              Scene 05
-            </span>
-            <h2 className="font-display text-2xl font-semibold text-ink">Draggable Polaroid Scatter</h2>
-          </div>
-          <span className="font-mono text-xs text-ink/60 flex items-center gap-1">
-            <Move className="w-3.5 h-3.5 text-pink" /> Drag photos freely
-          </span>
-        </div>
-
-        <div className="relative bg-sand/20 rounded-3xl md:rounded-[40px] p-6 md:p-12 border border-sand min-h-[460px] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 overflow-hidden">
-          {scene5Photos.map((photo, idx) => {
-            const rotations = [-6, 8, -4, 7];
-            const rot = rotations[idx % rotations.length];
+      {/* ============================ 3. EDITORIAL LOOKBOOK PLATES ============================ */}
+      <section className="max-w-7xl mx-auto px-6 md:px-12 space-y-16 md:space-y-24">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
+          {filteredPhotos.map((photo, idx) => {
+            const isWide = idx % 5 === 0;
+            const spanClass = isWide ? 'md:col-span-12' : 'md:col-span-6';
+            const aspectClass = isWide ? 'aspect-[16/9] md:aspect-[21/9]' : 'aspect-[4/3] md:aspect-[16/11]';
 
             return (
               <motion.div
                 key={photo.id}
-                drag
-                dragConstraints={{ left: -50, right: 50, top: -50, bottom: 50 }}
-                whileDrag={{ scale: 1.08, zIndex: 40, cursor: 'grabbing' }}
-                whileHover={{ scale: 1.04 }}
-                initial={{ rotate: rot }}
-                className="bg-cream p-4 rounded-3xl border border-sand shadow-md cursor-grab flex flex-col justify-between space-y-3 select-none"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                transition={{ duration: 0.8, delay: (idx % 3) * 0.1 }}
+                className={`${spanClass} space-y-3 cursor-pointer group`}
+                onClick={() => setSelectedPhoto(photo)}
               >
-                <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-sand pointer-events-none">
-                  <img src={photo.src} alt={photo.title} className="w-full h-full object-cover" />
+                <div className={`relative ${aspectClass} overflow-hidden bg-sand`}>
+                  <img
+                    src={photo.src}
+                    alt={photo.title}
+                    loading="lazy"
+                    className="w-full h-full object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105"
+                  />
+                  <span className="absolute top-4 left-4 font-mono text-[10px] tracking-widest text-paper mix-blend-difference">
+                    {String(idx + 1).padStart(2, '0')} / {String(filteredPhotos.length).padStart(2, '0')}
+                  </span>
                 </div>
-                <div className="space-y-1 pointer-events-none">
-                  <span className="font-mono text-[10px] text-pink font-semibold uppercase">{photo.category}</span>
-                  <h4 className="font-display text-xs font-semibold text-ink">{photo.title}</h4>
+
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between text-graphite font-body text-[11px] tracking-[0.18em] uppercase pt-2 border-t border-line">
+                  <span className="text-ink font-medium group-hover:italic transition-all">{photo.title}</span>
+                  <span className="text-graphite/70">{photo.location}</span>
                 </div>
               </motion.div>
             );
@@ -347,108 +142,71 @@ export default function Gallery() {
         </div>
       </section>
 
-      {/* =========================================================================
-          SCENE 6: CATEGORY FLIP-FILTER GRID + LIGHTBOX MODAL (All 21 Photos)
-          ========================================================================= */}
-      <section className="space-y-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-sand pb-4">
-          <div className="space-y-1">
-            <div className="flex items-center gap-2">
-              <span className="font-mono text-xs font-bold px-2.5 py-0.5 rounded-full bg-pinkP text-pink">
-                Scene 06
-              </span>
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-ink">
-                All 21 Showroom Photos (Flip Filter)
-              </h2>
-            </div>
-            <p className="font-body text-xs text-ink/70">
-              Filter by architectural context with smooth animated re-layout.
-            </p>
-          </div>
-
-          {/* Filter Chips */}
-          <div className="flex flex-wrap gap-1.5">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setFilterCategory(cat)}
-                className={`px-4 py-1.5 rounded-full font-body text-xs font-semibold transition-all ${
-                  filterCategory === cat
-                    ? 'bg-ink text-cream shadow-xs'
-                    : 'bg-cream border border-sand text-ink/80 hover:bg-sand/40'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Animated Re-layout Grid */}
-        <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          <AnimatePresence>
-            {filteredPhotos.map((photo) => (
-              <motion.div
-                layout
-                key={photo.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.35 }}
-                onClick={() => setSelectedPhoto(photo)}
-                className="group relative cursor-pointer rounded-3xl overflow-hidden bg-sand aspect-[4/3] shadow-sm hover:shadow-lg transition-all border border-sand"
-              >
-                <img
-                  src={photo.src}
-                  alt={photo.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end text-cream space-y-1">
-                  <span className="font-mono text-[10px] uppercase text-pink tracking-wider font-semibold">{photo.category}</span>
-                  <h3 className="font-display text-base font-semibold">{photo.title}</h3>
-                  <span className="font-body text-xs text-sand/80 flex items-center gap-1">
-                    Expand Lightbox <Maximize2 className="w-3 h-3" />
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-      </section>
-
-      {/* Lightbox Modal */}
-      {selectedPhoto && (
-        <div
-          className="fixed inset-0 z-50 bg-ink/85 backdrop-blur-md p-4 md:p-8 flex items-center justify-center animate-in fade-in duration-200"
-          onClick={() => setSelectedPhoto(null)}
-        >
-          <div
-            className="relative max-w-4xl w-full bg-cream rounded-3xl overflow-hidden shadow-2xl border border-sand p-4 md:p-6 space-y-4"
-            onClick={(e) => e.stopPropagation()}
+      {/* ============================ 4. MINIMAL FULL-SCREEN LIGHTBOX ============================ */}
+      <AnimatePresence>
+        {selectedPhoto && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={() => setSelectedPhoto(null)}
+            className="fixed inset-0 z-[100] bg-noir/95 backdrop-blur-md p-6 md:p-12 flex flex-col justify-between"
           >
-            <div className="aspect-[16/10] rounded-2xl overflow-hidden bg-sand">
+            {/* Top Close Bar */}
+            <div className="flex items-center justify-between text-paper font-body text-xs tracking-[0.2em] uppercase">
+              <span>{selectedPhoto.category} ARCHIVE</span>
+              <button
+                onClick={() => setSelectedPhoto(null)}
+                className="flex items-center gap-2 hover:opacity-70 transition-opacity p-2"
+              >
+                <span>CLOSE</span>
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            {/* Center Image */}
+            <div className="flex-1 flex items-center justify-center p-4 md:p-8" onClick={(e) => e.stopPropagation()}>
               <img
                 src={selectedPhoto.src}
                 alt={selectedPhoto.title}
-                className="w-full h-full object-cover"
+                className="max-h-[75vh] max-w-full object-contain"
               />
             </div>
-            <div className="flex items-center justify-between flex-wrap gap-2">
-              <div>
-                <span className="font-mono text-xs text-pink uppercase font-semibold">{selectedPhoto.category}</span>
-                <h3 className="font-display text-xl font-semibold text-ink">{selectedPhoto.title}</h3>
-              </div>
-              <button
-                onClick={() => setSelectedPhoto(null)}
-                className="px-4 py-2 rounded-full bg-ink text-cream text-xs font-mono font-medium hover:bg-pink transition-colors"
-              >
-                Close (ESC)
-              </button>
+
+            {/* Bottom Caption */}
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-paper/70 font-body text-[11px] tracking-[0.2em] uppercase border-t border-paper/10 pt-4 max-w-6xl mx-auto w-full">
+              <span className="text-paper">{selectedPhoto.title}</span>
+              <span>{selectedPhoto.location}</span>
             </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* ============================ 5. VISIT SHOWROOMS CTA ============================ */}
+      <section className="max-w-7xl mx-auto px-6 md:px-12 pt-32 md:pt-44">
+        <div className="border-t border-line pt-16 md:pt-24 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+          <div className="space-y-2">
+            <h3 className="font-serif text-3xl md:text-5xl font-light text-ink">
+              Experience the physical spaces
+            </h3>
+            <p className="font-body text-base text-graphite font-light max-w-md">
+              Visit our Rajkot or Ahmedabad material studios to inspect full-size panels under true architectural lighting.
+            </p>
           </div>
+
+          <Link
+            to="/showrooms"
+            className="group inline-flex items-center gap-2 font-body text-xs uppercase tracking-[0.2em] text-ink"
+          >
+            <span className="border-b border-ink pb-0.5 group-hover:border-graphite transition-colors">
+              VIEW SHOWROOM HUBS
+            </span>
+            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
         </div>
-      )}
+      </section>
+
     </div>
   );
 }
