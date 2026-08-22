@@ -2,41 +2,44 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ==========================================================================
-   SELF-HOSTED FONTS (@font-face)
-   ========================================================================== */
+/* =========================================================================
+   SELF-HOSTED LUXURY TYPOGRAPHY (ZODIAK + GENERAL SANS + GEIST MONO)
+   ========================================================================= */
 
-/* Clash Display (Display / Headings) */
+/* Zodiak Didone Serif (Display & Editorial Statements) */
 @font-face {
-  font-family: 'Clash Display';
-  src: url('/fonts/ClashDisplay-400-normal.woff2') format('woff2');
+  font-family: 'Zodiak';
+  src: url('/fonts/Zodiak-300-normal.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Zodiak';
+  src: url('/fonts/Zodiak-400-normal.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
-  font-family: 'Clash Display';
-  src: url('/fonts/ClashDisplay-500-normal.woff2') format('woff2');
-  font-weight: 500;
-  font-style: normal;
+  font-family: 'Zodiak';
+  src: url('/fonts/Zodiak-400-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
   font-display: swap;
 }
+
 @font-face {
-  font-family: 'Clash Display';
-  src: url('/fonts/ClashDisplay-600-normal.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Clash Display';
-  src: url('/fonts/ClashDisplay-700-normal.woff2') format('woff2');
+  font-family: 'Zodiak';
+  src: url('/fonts/Zodiak-700-normal.woff2') format('woff2');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
-/* General Sans (Body / UI) */
+/* General Sans (Body, Labels, Nav, Captions) */
 @font-face {
   font-family: 'General Sans';
   src: url('/fonts/GeneralSans-400-normal.woff2') format('woff2');
@@ -44,6 +47,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'General Sans';
   src: url('/fonts/GeneralSans-500-normal.woff2') format('woff2');
@@ -51,6 +55,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'General Sans';
   src: url('/fonts/GeneralSans-600-normal.woff2') format('woff2');
@@ -59,7 +64,7 @@
   font-display: swap;
 }
 
-/* Geist Mono (Labels, Eyebrows, Data, Stats) */
+/* Geist Mono (Technical Specifications & Numeric Data) */
 @font-face {
   font-family: 'Geist Mono';
   src: url('/fonts/GeistMono-400-normal.woff2') format('woff2');
@@ -67,6 +72,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Geist Mono';
   src: url('/fonts/GeistMono-500-normal.woff2') format('woff2');
@@ -74,139 +80,65 @@
   font-style: normal;
   font-display: swap;
 }
-@font-face {
-  font-family: 'Geist Mono';
-  src: url('/fonts/GeistMono-600-normal.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
 
-/* Shantell Sans (Handwritten / Doodles) */
-@font-face {
-  font-family: 'Shantell Sans';
-  src: url('/fonts/ShantellSans-400-normal.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Shantell Sans';
-  src: url('/fonts/ShantellSans-600-normal.woff2') format('woff2');
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: 'Shantell Sans';
-  src: url('/fonts/ShantellSans-400-italic.woff2') format('woff2');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-/* ==========================================================================
-   BASE & CORE STYLING
-   ========================================================================== */
+/* =========================================================================
+   GLOBAL RESET & LUXURY ESSENTIALS
+   ========================================================================= */
 
 :root {
-  --color-cream: #FBF7F0;
-  --color-sand: #EADFCB;
-  --color-ink: #2A2724;
-  --color-pink: #E6329B;
-  --color-pink-p: #FBD9EC;
-  --color-sky: #1FA9E0;
-  --color-sky-p: #D6EEF9;
-  --color-lime: #9FB524;
-  --color-lime-p: #ECF2C6;
-  --color-peach-p: #FBE0D2;
+  --color-paper: #F4F1EA;
+  --color-alabaster: #FBFAF7;
+  --color-ink: #16130F;
+  --color-graphite: #6B655C;
+  --color-line: rgba(22, 19, 15, 0.14);
+  --color-noir: #0E0C0A;
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--color-cream);
+  background-color: var(--color-paper);
   color: var(--color-ink);
   font-family: 'General Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   overflow-x: hidden;
-  background-color: var(--color-cream);
+  background-color: var(--color-paper);
   color: var(--color-ink);
   margin: 0;
   padding: 0;
 }
 
-/* Headings */
-h1, h2, h3, .font-display {
-  font-family: 'Clash Display', sans-serif;
-  letter-spacing: -0.02em;
+/* Luxury Headings */
+h1, h2, h3, .font-display, .font-serif {
+  font-family: 'Zodiak', 'Didot', 'Bodoni MT', serif;
 }
 
-.font-handwritten {
-  font-family: 'Shantell Sans', cursive;
+.font-body {
+  font-family: 'General Sans', -apple-system, sans-serif;
 }
 
 .font-mono {
   font-family: 'Geist Mono', monospace;
 }
 
-/* Glass effect utilities */
-.glass-panel {
-  background: rgba(251, 247, 240, 0.75);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.65);
-}
-
-.glass-pill {
-  background: rgba(251, 247, 240, 0.82);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(234, 223, 203, 0.6);
-  box-shadow: 0 10px 30px -10px rgba(42, 39, 36, 0.08);
-}
-
-/* Magic UI Border Beam */
-.border-beam-container {
-  position: relative;
-}
-.border-beam-overlay {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  overflow: hidden;
-  pointer-events: none;
-}
-.border-beam-overlay::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.5px;
-  background: linear-gradient(90deg, transparent, rgba(230, 50, 155, 0.4), rgba(31, 169, 224, 0.4), transparent);
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-}
-
-/* Smooth custom scrollbar */
+/* Custom Minimal Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #FBF7F0;
+  background: var(--color-paper);
 }
 ::-webkit-scrollbar-thumb {
-  background: #EADFCB;
-  border-radius: 9999px;
+  background: rgba(22, 19, 15, 0.2);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #d4c5ab;
+  background: rgba(22, 19, 15, 0.4);
 }
 
-/* Reduced Motion Fallback */
+/* Accessibility / Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after {
     animation-duration: 0.01ms !important;
