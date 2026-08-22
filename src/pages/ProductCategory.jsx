@@ -1,10 +1,11 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
-import { 
-  ChevronRight, Sparkles, ShieldCheck, ArrowRight, 
-  Layers, CheckCircle2, Download, Box, MapPin 
-} from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { PRODUCT_CATEGORIES } from '../data/productsData';
+
+/**
+ * PRODUCT CATEGORY — Luxury Material Specification (Prada / Celine standard).
+ */
 
 export default function ProductCategory() {
   const { category: slug } = useParams();
@@ -15,156 +16,135 @@ export default function ProductCategory() {
   }
 
   return (
-    <div className="pt-28 pb-20 px-4 md:px-8 max-w-7xl mx-auto space-y-16">
-      {/* Breadcrumb */}
-      <nav className="flex items-center gap-2 font-mono text-xs text-ink/60">
-        <Link to="/" className="hover:text-pink">Home</Link>
-        <ChevronRight className="w-3 h-3" />
-        <Link to="/products" className="hover:text-pink">Products</Link>
-        <ChevronRight className="w-3 h-3" />
-        <span className="text-ink font-semibold">{category.title}</span>
-      </nav>
+    <div className="bg-paper text-ink selection:bg-ink selection:text-paper pt-36 md:pt-48 pb-28 md:pb-40">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-20">
 
-      {/* Hero Header */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-        <div className="lg:col-span-7 space-y-5">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pinkP text-ink font-mono text-xs font-semibold uppercase">
-            <Sparkles className="w-3.5 h-3.5 text-pink" />
-            {category.eyebrow}
-          </div>
+        {/* ============================ 1. BREADCRUMB & HEADER ============================ */}
+        <div className="space-y-8">
+          <nav className="flex items-center gap-3 font-body text-[11px] tracking-[0.2em] uppercase text-graphite">
+            <Link to="/" className="hover:text-ink transition-colors">Home</Link>
+            <span>/</span>
+            <Link to="/products" className="hover:text-ink transition-colors">Products</Link>
+            <span>/</span>
+            <span className="text-ink font-medium">{category.title}</span>
+          </nav>
 
-          <h1 className="font-display text-4xl sm:text-5xl md:text-6xl font-semibold text-ink leading-tight">
-            {category.title}
-          </h1>
-
-          <p className="font-body text-base md:text-lg text-ink/80 leading-relaxed">
-            {category.description}
-          </p>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-2">
-            <div className="p-4 rounded-2xl bg-cream border border-sand">
-              <span className="font-mono text-[11px] text-ink/60 uppercase block">Gauges</span>
-              <strong className="font-display text-sm text-ink">{category.thickness}</strong>
+          <div className="grid md:grid-cols-12 gap-8 items-end">
+            <div className="md:col-span-8 space-y-4">
+              <p className="font-body text-[11px] tracking-[0.25em] uppercase text-graphite">
+                {category.eyebrow}
+              </p>
+              <h1 className="font-serif font-light leading-[0.92] tracking-[-0.03em] text-ink text-5xl md:text-7xl lg:text-8xl">
+                {category.title}
+              </h1>
             </div>
-            <div className="p-4 rounded-2xl bg-cream border border-sand">
-              <span className="font-mono text-[11px] text-ink/60 uppercase block">Inventory</span>
-              <strong className="font-display text-sm text-sky">{category.badge}</strong>
+            <div className="md:col-span-4 md:pb-2">
+              <p className="font-body text-base md:text-lg text-graphite font-light leading-relaxed">
+                {category.description}
+              </p>
             </div>
-            <div className="p-4 rounded-2xl bg-cream border border-sand">
-              <span className="font-mono text-[11px] text-ink/60 uppercase block">Brands</span>
-              <strong className="font-display text-sm text-pink">{category.brandsAvailable.length} Lines</strong>
-            </div>
-          </div>
-
-          {/* Action CTAs */}
-          <div className="flex flex-wrap items-center gap-3 pt-4">
-            <Link
-              to="/dealers/find"
-              className="px-6 py-3 rounded-full bg-pink text-white font-body text-xs font-semibold hover:bg-pink/90 transition-all flex items-center gap-2 shadow-sm"
-            >
-              <MapPin className="w-3.5 h-3.5" />
-              <span>Find Nearest Authorized Dealer</span>
-            </Link>
-
-            <Link
-              to="/virtual-3d"
-              className="px-5 py-3 rounded-full bg-cream border border-sky/40 text-ink font-body text-xs font-medium hover:bg-skyP/40 transition-colors flex items-center gap-1.5"
-            >
-              <Box className="w-3.5 h-3.5 text-sky" />
-              <span>Preview in Virtual 3D</span>
-            </Link>
           </div>
         </div>
 
-        {/* Arch Image Frame */}
-        <div className="lg:col-span-5">
-          <div className="relative w-full aspect-[3/4] rounded-arch overflow-hidden bg-sand shadow-xl border border-sand">
+        {/* Hairline Divider */}
+        <div className="h-px bg-line" />
+
+        {/* ============================ 2. HERO CAMPAIGN VISUAL ============================ */}
+        <div className="space-y-4">
+          <div className="relative aspect-[16/9] md:aspect-[21/9] overflow-hidden bg-sand">
             <img
               src={category.image}
               alt={category.title}
               className="w-full h-full object-cover"
             />
-            <div className="absolute bottom-4 left-4 right-4 p-4 rounded-2xl bg-cream/95 backdrop-blur-md border border-sand/70 text-center font-handwritten text-sm text-ink">
-              ~ High scratch resistance & precision calibrating
+          </div>
+          <div className="flex items-center justify-between text-graphite font-body text-[11px] tracking-[0.2em] uppercase pt-2 border-t border-line">
+            <span>{category.title} ARCHITECTURAL SPECIFICATION</span>
+            <span>GAUGES: {category.thickness} · {category.badge}</span>
+          </div>
+        </div>
+
+        {/* ============================ 3. TECHNICAL SPECIFICATIONS ============================ */}
+        <div className="grid md:grid-cols-12 gap-12 md:gap-16 pt-8 items-start">
+          <div className="md:col-span-4 space-y-6">
+            <p className="font-body text-[11px] tracking-[0.25em] uppercase text-graphite">
+              MATERIAL ATTRIBUTES
+            </p>
+            
+            <div className="space-y-4 border-t border-line pt-4 font-body text-xs text-graphite">
+              <div className="flex justify-between py-2 border-b border-line">
+                <span className="uppercase tracking-wider">Gauge Range</span>
+                <span className="font-mono text-ink">{category.thickness}</span>
+              </div>
+              <div className="flex justify-between py-2 border-b border-line">
+                <span className="uppercase tracking-wider">Inventory Status</span>
+                <span className="font-mono text-ink">{category.badge}</span>
+              </div>
+              <div className="flex justify-between py-2 border-b border-line">
+                <span className="uppercase tracking-wider">Dedicated Brands</span>
+                <span className="font-mono text-ink">{category.brandsAvailable.length} Lines</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="md:col-span-8 space-y-12">
+            {/* Finishes */}
+            <div className="space-y-4">
+              <p className="font-body text-[11px] tracking-[0.25em] uppercase text-graphite">
+                CURATED SURFACE TEXTURES & FINISHES
+              </p>
+              <p className="font-body text-xs tracking-wider uppercase text-graphite/80 leading-relaxed">
+                {category.finishes.join('  ·  ')}
+              </p>
+            </div>
+
+            {/* Applications */}
+            <div className="space-y-4 border-t border-line pt-8">
+              <p className="font-body text-[11px] tracking-[0.25em] uppercase text-graphite">
+                ARCHITECTURAL APPLICATIONS
+              </p>
+              <p className="font-body text-sm text-graphite font-light leading-relaxed">
+                {category.applications.join('  ·  ')}
+              </p>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Finishes Swatch Tray */}
-      <section className="bg-sand/30 border border-sand rounded-3xl p-6 md:p-10 space-y-6">
-        <div className="space-y-1">
-          <span className="font-mono text-xs font-semibold text-lime uppercase tracking-widest">
-            FINISHES & TEXTURE SPECS
-          </span>
-          <h2 className="font-display text-2xl md:text-3xl font-semibold text-ink">
-            Curated Swatches & Surfaces
-          </h2>
-        </div>
+        {/* ============================ 4. TRADE ENQUIRY CTA ============================ */}
+        <div className="border-t border-line pt-16 md:pt-24 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+          <div className="space-y-2">
+            <h3 className="font-serif text-2xl md:text-4xl font-light text-ink">
+              Specify {category.title} for your project
+            </h3>
+            <p className="font-body text-sm text-graphite font-light">
+              Connect with our central wholesale trade desk or find your nearest certified dealer outpost.
+            </p>
+          </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-          {category.finishes.map((f, idx) => (
-            <div
-              key={idx}
-              className="p-4 rounded-2xl bg-cream border border-sand shadow-xs text-center space-y-2 flex flex-col items-center justify-center hover:border-pink/40 transition-colors"
+          <div className="flex items-center gap-8">
+            <Link
+              to="/dealers/find"
+              className="group inline-flex items-center gap-2 font-body text-xs uppercase tracking-[0.2em] text-ink"
             >
-              <div className="w-8 h-8 rounded-full bg-sand/70 border border-ink/10 flex items-center justify-center font-mono text-xs text-ink/70">
-                0{idx + 1}
-              </div>
-              <span className="font-body text-xs font-semibold text-ink">{f}</span>
-            </div>
-          ))}
-        </div>
-      </section>
+              <span className="border-b border-ink pb-0.5 group-hover:border-graphite transition-colors">
+                FIND NEAREST DEALER
+              </span>
+              <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Link>
 
-      {/* Recommended Applications */}
-      <section className="space-y-6">
-        <h2 className="font-display text-2xl md:text-3xl font-semibold text-ink">
-          Recommended Applications
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {category.applications.map((app, idx) => (
-            <div
-              key={idx}
-              className="p-5 rounded-2xl bg-cream border border-sand shadow-xs flex items-center gap-3"
+            <Link
+              to="/contact"
+              className="group inline-flex items-center gap-2 font-body text-xs uppercase tracking-[0.2em] text-ink"
             >
-              <CheckCircle2 className="w-5 h-5 text-lime flex-shrink-0" />
-              <span className="font-body text-sm text-ink font-medium">{app}</span>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Wholesale Super-Stockist Notice & Bottom CTA */}
-      <section className="p-8 md:p-12 rounded-3xl bg-ink text-cream flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="space-y-2 max-w-xl">
-          <span className="font-mono text-xs text-limeP uppercase tracking-wider">
-            WHOLESALE TRADE & CONTRACTOR SUPPLY
-          </span>
-          <h3 className="font-display text-2xl md:text-3xl font-semibold text-cream">
-            Need physical shade-cards or bulk lot dispatch?
-          </h3>
-          <p className="font-body text-xs md:text-sm text-sand/80">
-            We provide full-volume wholesale support across Gujarat. Contact our trade desk or apply to become an authorized dealer.
-          </p>
+              <span className="border-b border-ink pb-0.5 group-hover:border-graphite transition-colors">
+                TRADE ENQUIRY
+              </span>
+              <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </Link>
+          </div>
         </div>
 
-        <div className="flex items-center gap-3 flex-shrink-0">
-          <Link
-            to="/dealers/become"
-            className="px-6 py-3 rounded-full bg-pink text-white font-body text-xs font-semibold hover:bg-pink/90 transition-all flex items-center gap-1.5 shadow-md"
-          >
-            <span>Apply as Dealer</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
-          <Link
-            to="/catalogues"
-            className="px-5 py-3 rounded-full bg-cream/10 border border-cream/20 text-cream font-body text-xs hover:bg-cream/20 transition-all"
-          >
-            Download PDF
-          </Link>
-        </div>
-      </section>
+      </div>
     </div>
   );
 }
