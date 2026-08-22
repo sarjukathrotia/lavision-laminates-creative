@@ -1,85 +1,94 @@
 import React, { useState, Suspense, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Float, Text, MeshReflectorMaterial } from '@react-three/drei';
-import { Sparkles, Box, RefreshCw, Layers, MapPin, ArrowRight } from 'lucide-react';
+import { OrbitControls, Float, MeshReflectorMaterial } from '@react-three/drei';
+import { ArrowUpRight } from 'lucide-react';
+
+/**
+ * VIRTUAL 3D — The Material Studio (Luxury Monochrome Reskin).
+ * 
+ * - Noir studio aesthetic with paper UI text and sharp edges (radius 0).
+ * - Full interactive 3D panel with OrbitControls.
+ * - Finishes listed as tiny tracked uppercase labels.
+ * - Thin underline link to "TRADE ENQUIRY".
+ */
 
 const FINISH_PRESETS = [
-  { id: 'smoked-oak', name: 'Smoked Oak Woodgrain', color: '#6d4c41', roughness: 0.85, metalness: 0.1, category: 'Laminates' },
-  { id: 'nordic-ash', name: 'Nordic Light Ash', color: '#d7ccc8', roughness: 0.75, metalness: 0.05, category: 'Laminates' },
-  { id: 'charcoal-flute', name: 'Charcoal Fluted Louver', color: '#2b2b2b', roughness: 0.9, metalness: 0.2, category: 'Louvers' },
-  { id: 'crystal-acrylic', name: 'Ultra High-Gloss Acrylic', color: '#e0f7fa', roughness: 0.08, metalness: 0.4, category: 'Acrylics' },
-  { id: 'terracotta-silk', name: 'Terracotta Velvet Matte', color: '#b25d48', roughness: 0.8, metalness: 0.05, category: 'Solid Decors' },
-  { id: 'champagne-gold', name: 'Champagne Metallic Pearl', color: '#cfb584', roughness: 0.35, metalness: 0.65, category: 'Specialty' }
+  { id: 'smoked-oak', name: 'Smoked European Oak', color: '#4A3B32', roughness: 0.85, metalness: 0.1, category: 'Synchronized Woodgrain' },
+  { id: 'nordic-ash', name: 'Nordic Light Ash', color: '#D4CDC5', roughness: 0.75, metalness: 0.05, category: 'Natural Timber' },
+  { id: 'charcoal-flute', name: 'Charcoal Fluted Louver', color: '#1F1D1B', roughness: 0.9, metalness: 0.15, category: 'Acoustic Panel' },
+  { id: 'crystal-acrylic', name: '6H Optical Crystal', color: '#F0ECE1', roughness: 0.05, metalness: 0.35, category: 'High-Gloss Acrylic' },
+  { id: 'terracotta-silk', name: 'Terracotta Velvet Matte', color: '#8C4F40', roughness: 0.8, metalness: 0.05, category: 'Solid Super-Matte' },
+  { id: 'champagne-titanium', name: 'Champagne Titanium Anodized', color: '#B5A895', roughness: 0.3, metalness: 0.6, category: 'Metallic Polymer' }
 ];
 
-// Interactive 3D Room Model Component
+// Interactive 3D Room Model in Noir Studio
 function Room3DModel({ activeFinish, isGlossy }) {
   const panelRef = useRef();
 
   useFrame((state) => {
     if (panelRef.current) {
-      panelRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.4) * 0.1;
+      panelRef.current.rotation.y = Math.sin(state.clock.elapsedTime * 0.3) * 0.08;
     }
   });
 
   return (
     <group position={[0, -0.6, 0]}>
-      {/* Floor with Soft Reflections */}
+      {/* Studio Reflector Floor */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, 0, 0]}>
-        <planeGeometry args={[12, 12]} />
+        <planeGeometry args={[16, 16]} />
         <MeshReflectorMaterial
-          blur={[300, 100]}
+          blur={[400, 150]}
           resolution={512}
-          mirror={0.25}
-          mixBlur={1}
-          mixStrength={1.5}
-          roughness={0.6}
+          mirror={0.35}
+          mixBlur={1.2}
+          mixStrength={1.8}
+          roughness={0.5}
           depthScale={1}
           minDepthThreshold={0.4}
           maxDepthThreshold={1.4}
-          color="#EADFCB"
-          metalness={0.1}
+          color="#0E0C0A"
+          metalness={0.2}
         />
       </mesh>
 
-      {/* Main Architectural Wall */}
-      <mesh position={[0, 2, -2]}>
-        <boxGeometry args={[7, 4, 0.2]} />
-        <meshStandardMaterial color="#FBF7F0" roughness={0.9} />
+      {/* Architectural Studio Backing Wall */}
+      <mesh position={[0, 2.2, -2.5]}>
+        <boxGeometry args={[9, 5, 0.2]} />
+        <meshStandardMaterial color="#16130F" roughness={0.95} />
       </mesh>
 
-      {/* Hero Swappable Decorative Surface Panel */}
-      <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.3}>
+      {/* Floating Hero Surface Specimen */}
+      <Float speed={1.2} rotationIntensity={0.15} floatIntensity={0.2}>
         <group ref={panelRef} position={[0, 1.8, 0]}>
           {/* Surface Panel */}
           <mesh castShadow receiveShadow>
-            <boxGeometry args={[3.2, 2.4, 0.12]} />
+            <boxGeometry args={[3.4, 2.5, 0.1]} />
             <meshStandardMaterial
               color={activeFinish.color}
-              roughness={isGlossy ? 0.1 : activeFinish.roughness}
+              roughness={isGlossy ? 0.06 : activeFinish.roughness}
               metalness={isGlossy ? 0.35 : activeFinish.metalness}
             />
           </mesh>
 
           {/* Precision 2mm Edge Banding Rim */}
           <mesh position={[0, 0, -0.01]}>
-            <boxGeometry args={[3.26, 2.46, 0.08]} />
-            <meshStandardMaterial color="#2A2724" roughness={0.4} />
+            <boxGeometry args={[3.44, 2.54, 0.08]} />
+            <meshStandardMaterial color="#16130F" roughness={0.4} />
           </mesh>
         </group>
       </Float>
 
       {/* Secondary Left Accent Fluted Column */}
-      <mesh position={[-2.4, 1.5, -1]}>
-        <cylinderGeometry args={[0.3, 0.3, 3, 32]} />
-        <meshStandardMaterial color="#2A2724" roughness={0.8} />
+      <mesh position={[-2.8, 1.6, -1.2]}>
+        <cylinderGeometry args={[0.3, 0.3, 3.2, 32]} />
+        <meshStandardMaterial color="#2A2724" roughness={0.85} />
       </mesh>
 
       {/* Secondary Right Accent Column */}
-      <mesh position={[2.4, 1.5, -1]}>
-        <cylinderGeometry args={[0.3, 0.3, 3, 32]} />
-        <meshStandardMaterial color="#E6329B" roughness={0.3} metalness={0.2} />
+      <mesh position={[2.8, 1.6, -1.2]}>
+        <cylinderGeometry args={[0.3, 0.3, 3.2, 32]} />
+        <meshStandardMaterial color="#16130F" roughness={0.7} metalness={0.2} />
       </mesh>
     </group>
   );
@@ -90,133 +99,165 @@ export default function Virtual3D() {
   const [isGlossy, setIsGlossy] = useState(false);
 
   return (
-    <div className="pt-28 pb-20 px-4 md:px-8 max-w-7xl mx-auto space-y-12">
-      {/* Header */}
-      <section className="text-center max-w-3xl mx-auto space-y-4">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-skyP text-ink font-mono text-xs font-semibold uppercase tracking-widest">
-          <Sparkles className="w-3.5 h-3.5 text-sky" />
-          INTERACTIVE 3D ROOM VIEWER
-        </div>
+    <div className="bg-paper text-ink selection:bg-ink selection:text-paper pt-36 md:pt-48 pb-28 md:pb-40">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-16">
 
-        <h1 className="font-display text-4xl sm:text-6xl font-semibold text-ink leading-tight">
-          See it before you <span className="text-pink italic">order</span>.
-        </h1>
-
-        <p className="font-body text-base md:text-lg text-ink/80 leading-relaxed">
-          Rotate in 3D, switch surface finishes, and toggle gloss reflection levels live. Then contact your nearest Gujarat dealer for wholesale supply.
-        </p>
-      </section>
-
-      {/* 3D Interactive Canvas Box */}
-      <div className="relative w-full h-[500px] md:h-[600px] bg-sand/30 rounded-3xl md:rounded-[48px] overflow-hidden border border-sand shadow-inner flex flex-col justify-between p-4 md:p-6">
-        {/* Floating 3D Instructions */}
-        <div className="flex items-center justify-between z-10 pointer-events-none">
-          <div className="px-3.5 py-1.5 rounded-full bg-cream/90 backdrop-blur-md border border-sand shadow-xs font-mono text-xs text-ink flex items-center gap-2">
-            <Box className="w-3.5 h-3.5 text-sky animate-spin" style={{ animationDuration: '6s' }} />
-            <span>Drag / Orbit to rotate 3D view</span>
-          </div>
-
-          {/* Matte / Gloss Toggle Button */}
-          <button
-            onClick={() => setIsGlossy(!isGlossy)}
-            className="pointer-events-auto px-4 py-1.5 rounded-full bg-cream border border-sand shadow-xs font-mono text-xs font-semibold text-ink hover:bg-sand/40 transition-colors flex items-center gap-1.5"
-          >
-            <span>Finish:</span>
-            <span className={`px-2 py-0.5 rounded-full ${isGlossy ? 'bg-pink text-white' : 'bg-sand text-ink'}`}>
-              {isGlossy ? 'High Gloss' : 'Natural Matte'}
-            </span>
-          </button>
-        </div>
-
-        {/* 3D Canvas */}
-        <div className="absolute inset-0">
-          <Canvas
-            shadows
-            camera={{ position: [0, 1.8, 4.5], fov: 45 }}
-            className="cursor-grab active:cursor-grabbing"
-          >
-            <ambientLight intensity={0.8} />
-            <directionalLight position={[5, 8, 5]} intensity={1.2} castShadow />
-            <pointLight position={[-4, 3, 2]} intensity={0.5} color="#FBD9EC" />
-            <pointLight position={[4, 3, 2]} intensity={0.5} color="#D6EEF9" />
-
-            <Suspense fallback={null}>
-              <Room3DModel activeFinish={activeFinish} isGlossy={isGlossy} />
-            </Suspense>
-
-            <OrbitControls
-              enablePan={false}
-              maxPolarAngle={Math.PI / 2 - 0.05}
-              minDistance={3}
-              maxDistance={7}
-            />
-          </Canvas>
-        </div>
-
-        {/* Bottom Active Swatch Badge */}
-        <div className="z-10 flex items-center justify-between pointer-events-none">
-          <div className="px-4 py-2 rounded-2xl bg-cream/90 backdrop-blur-md border border-sand shadow-sm">
-            <span className="font-mono text-[10px] text-ink/60 uppercase block">{activeFinish.category}</span>
-            <strong className="font-display text-sm text-ink">{activeFinish.name}</strong>
-          </div>
-
-          <div className="font-handwritten text-sm text-pink hidden md:block">
-            ~ "Precision 2mm matched edge banding included"
-          </div>
-        </div>
-      </div>
-
-      {/* Swatch Selector Tray */}
-      <section className="space-y-4">
-        <div className="flex items-center justify-between">
-          <h2 className="font-display text-2xl font-semibold text-ink">Select Texture Swatch</h2>
-          <span className="font-mono text-xs text-ink/60">{FINISH_PRESETS.length} Surface Presets</span>
-        </div>
-
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
-          {FINISH_PRESETS.map((preset) => (
-            <button
-              key={preset.id}
-              onClick={() => setActiveFinish(preset)}
-              className={`p-4 rounded-2xl border text-left transition-all flex flex-col justify-between h-28 ${
-                activeFinish.id === preset.id
-                  ? 'border-pink bg-pinkP/40 shadow-md ring-2 ring-pink/30'
-                  : 'border-sand bg-cream hover:bg-sand/30'
-              }`}
-            >
-              <div className="flex items-center justify-between">
-                <div
-                  className="w-6 h-6 rounded-full border border-ink/20 shadow-xs"
-                  style={{ backgroundColor: preset.color }}
-                />
-                <span className="font-mono text-[10px] text-ink/50">{preset.category}</span>
-              </div>
-              <div>
-                <span className="font-display text-xs font-semibold text-ink block line-clamp-1">{preset.name}</span>
-              </div>
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* Bottom CTA to Nearest Dealer */}
-      <section className="p-8 md:p-12 rounded-3xl bg-sand/40 border border-sand flex flex-col md:flex-row items-center justify-between gap-6">
-        <div className="space-y-1">
-          <h3 className="font-display text-2xl font-semibold text-ink">
-            Found the finish you love?
-          </h3>
-          <p className="font-body text-sm text-ink/75">
-            Locate your nearest authorized dealer in Gujarat to check live inventory and sample folders.
+        {/* ============================ 1. MASTHEAD ============================ */}
+        <section className="space-y-6">
+          <p className="font-body text-[11px] tracking-[0.25em] uppercase text-graphite">
+            THE MATERIAL STUDIO · 3D VISUALIZATION
           </p>
+          <div className="grid md:grid-cols-12 gap-8 items-end">
+            <div className="md:col-span-8">
+              <h1 className="font-serif font-light leading-[0.92] tracking-[-0.03em] text-ink text-[14vw] md:text-[8rem] lg:text-[9.5rem]">
+                The material<br />
+                <span className="italic font-normal">studio</span>.
+              </h1>
+            </div>
+            <div className="md:col-span-4 md:pb-3">
+              <p className="font-body text-base md:text-lg text-graphite font-light leading-relaxed max-w-sm">
+                Interact with high-pressure surface formulations in real-time. Rotate perspectives, evaluate textures, and switch reflectivity tiers.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Hairline Divider */}
+        <div className="h-px bg-line" />
+
+        {/* ============================ 2. 3D NOIR STUDIO CANVAS ============================ */}
+        <div className="relative w-full h-[520px] md:h-[650px] bg-noir overflow-hidden border border-noir flex flex-col justify-between p-6 md:p-8">
+          
+          {/* Top HUD Controls */}
+          <div className="flex items-center justify-between z-10 pointer-events-none">
+            <div className="font-body text-[11px] tracking-[0.2em] uppercase text-paper/70">
+              <span>ORBIT / DRAG TO ROTATE VIEW</span>
+            </div>
+
+            {/* Gloss / Matte Toggle */}
+            <div className="pointer-events-auto flex items-center gap-4 font-body text-[11px] tracking-[0.2em] uppercase text-paper/70">
+              <button
+                onClick={() => setIsGlossy(false)}
+                className={`transition-colors pb-0.5 ${!isGlossy ? 'text-paper font-medium border-b border-paper' : 'text-paper/40 hover:text-paper'}`}
+              >
+                NATURAL MATTE
+              </button>
+              <span className="text-paper/20">/</span>
+              <button
+                onClick={() => setIsGlossy(true)}
+                className={`transition-colors pb-0.5 ${isGlossy ? 'text-paper font-medium border-b border-paper' : 'text-paper/40 hover:text-paper'}`}
+              >
+                6H HIGH GLOSS
+              </button>
+            </div>
+          </div>
+
+          {/* 3D Canvas */}
+          <div className="absolute inset-0">
+            <Canvas
+              shadows
+              camera={{ position: [0, 1.8, 4.6], fov: 42 }}
+              className="cursor-grab active:cursor-grabbing"
+            >
+              <ambientLight intensity={0.9} />
+              <directionalLight position={[6, 9, 6]} intensity={1.5} castShadow />
+              <pointLight position={[-5, 3, 2]} intensity={0.6} color="#FBFAF7" />
+              <pointLight position={[5, 3, 2]} intensity={0.6} color="#F4F1EA" />
+
+              <Suspense fallback={null}>
+                <Room3DModel activeFinish={activeFinish} isGlossy={isGlossy} />
+              </Suspense>
+
+              <OrbitControls
+                enablePan={false}
+                maxPolarAngle={Math.PI / 2 - 0.05}
+                minDistance={3}
+                maxDistance={7}
+              />
+            </Canvas>
+          </div>
+
+          {/* Bottom HUD Active Specimen */}
+          <div className="z-10 flex items-end justify-between pointer-events-none">
+            <div className="font-body text-[11px] tracking-[0.2em] uppercase text-paper space-y-1">
+              <span className="text-paper/40 block">{activeFinish.category}</span>
+              <span className="font-medium text-sm text-paper">{activeFinish.name}</span>
+            </div>
+          </div>
         </div>
-        <Link
-          to="/dealers/find"
-          className="px-6 py-3 rounded-full bg-pink text-white font-body text-xs font-semibold hover:bg-pink/90 transition-all flex items-center gap-2 shadow-sm"
-        >
-          <MapPin className="w-4 h-4" />
-          <span>Find Nearest Dealer</span>
-        </Link>
-      </section>
+
+        {/* ============================ 3. FINISH SWATCH SELECTOR ============================ */}
+        <section className="space-y-6">
+          <div className="flex items-center justify-between border-b border-line pb-4">
+            <p className="font-body text-[11px] tracking-[0.25em] uppercase text-graphite">
+              SELECT SURFACE FORMULATION
+            </p>
+            <span className="font-mono text-xs text-graphite/60">
+              06 CURATED SPECIMENS
+            </span>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {FINISH_PRESETS.map((preset, idx) => {
+              const isSelected = activeFinish.id === preset.id;
+
+              return (
+                <button
+                  key={preset.id}
+                  onClick={() => setActiveFinish(preset)}
+                  className={`text-left p-6 border transition-all space-y-3 ${
+                    isSelected
+                      ? 'border-ink bg-alabaster shadow-subtle'
+                      : 'border-line hover:border-ink/40'
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-mono text-[11px] text-graphite/60 tracking-wider">
+                      0{idx + 1}
+                    </span>
+                    <div
+                      className="w-4 h-4 border border-line"
+                      style={{ backgroundColor: preset.color }}
+                    />
+                  </div>
+
+                  <div>
+                    <h3 className="font-body text-xs font-semibold tracking-[0.18em] uppercase text-ink">
+                      {preset.name}
+                    </h3>
+                    <p className="font-body text-[11px] tracking-[0.15em] uppercase text-graphite mt-1">
+                      {preset.category}
+                    </p>
+                  </div>
+                </button>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ============================ 4. TRADE ENQUIRY FOOTER ============================ */}
+        <section className="border-t border-line pt-16 md:pt-24 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+          <div className="space-y-2">
+            <h3 className="font-serif text-3xl md:text-5xl font-light text-ink">
+              Request physical shade samples
+            </h3>
+            <p className="font-body text-base text-graphite font-light max-w-md">
+              Order physical 1:1 scale sample boards or shade books delivered to your design studio.
+            </p>
+          </div>
+
+          <Link
+            to="/contact"
+            className="group inline-flex items-center gap-2 font-body text-xs uppercase tracking-[0.2em] text-ink"
+          >
+            <span className="border-b border-ink pb-0.5 group-hover:border-graphite transition-colors">
+              TRADE ENQUIRY
+            </span>
+            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </Link>
+        </section>
+
+      </div>
     </div>
   );
 }
