@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import confetti from 'canvas-confetti';
-import { 
-  Sparkles, Phone, Mail, MapPin, ArrowRight, 
-  CheckCircle2, MessageCircle, Instagram, Facebook, Linkedin, ShieldCheck 
-} from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -25,182 +22,159 @@ export default function Contact() {
         particleCount: 80,
         spread: 60,
         origin: { y: 0.6 },
-        colors: ['#E6329B', '#1FA9E0', '#9FB524']
+        colors: ['#2A2724', '#E6329B', '#1FA9E0']
       });
     } catch (e) {}
   };
 
   return (
-    <div className="pt-28 pb-20 px-4 md:px-8 max-w-7xl mx-auto space-y-16">
-      {/* Header */}
-      <section className="text-center max-w-3xl mx-auto space-y-4">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pinkP text-ink font-mono text-xs font-semibold uppercase tracking-widest">
-          <Sparkles className="w-3.5 h-3.5 text-pink" />
-          GET IN TOUCH WITH OUR WHOLESALE DESK
+    <div className="bg-cream text-ink">
+      {/* ============================ MASTHEAD ============================ */}
+      <section className="max-w-7xl mx-auto px-6 md:px-10 pt-32 md:pt-40 pb-16 md:pb-24">
+        <div className="grid md:grid-cols-12 gap-8 items-end">
+          <div className="md:col-span-9">
+            <p className="font-mono text-[11px] tracking-[0.25em] uppercase text-ink/45 mb-6">
+              Wholesale Trade Desk
+            </p>
+            <h1 className="font-display font-medium leading-[0.95] tracking-[-0.03em]
+                           text-[14vw] md:text-[8rem]">
+              Direct<br />
+              <span className="italic font-normal">trade</span> inquiries.
+            </h1>
+          </div>
+          <div className="md:col-span-3 md:pb-4">
+            <p className="font-body text-base md:text-lg text-ink/70 leading-relaxed max-w-xs">
+              Connect with our central distribution desk for architectural specifications, sample folders, and wholesale supply.
+            </p>
+          </div>
         </div>
-
-        <h1 className="font-display text-4xl sm:text-6xl font-semibold text-ink leading-tight">
-          Let’s discuss your <span className="text-pink italic">surface</span> requirements.
-        </h1>
-
-        <p className="font-body text-base md:text-lg text-ink/80 leading-relaxed">
-          Whether you are an architect specifying a villa project or a dealer seeking wholesale supply across Gujarat, our team is ready to assist.
-        </p>
       </section>
 
-      {/* Grid: Contact Form + Showroom Contacts */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-10 max-w-6xl mx-auto items-start">
-        {/* Form Container */}
-        <div className="lg:col-span-7 bg-cream border border-sand rounded-3xl md:rounded-[40px] p-6 md:p-10 shadow-sm">
-          {submitted ? (
-            <div className="text-center py-12 space-y-4">
-              <div className="w-16 h-16 rounded-full bg-limeP text-lime flex items-center justify-center mx-auto border border-lime/30 shadow-sm">
-                <CheckCircle2 className="w-8 h-8" />
+      {/* Hairline Divider */}
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
+        <div className="h-px bg-ink/12" />
+      </div>
+
+      {/* ============================ FORM & LOCATIONS ============================ */}
+      <section className="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-24">
+        <div className="grid md:grid-cols-12 gap-12 md:gap-16">
+          {/* Form */}
+          <div className="md:col-span-7">
+            <h2 className="font-display text-3xl font-medium tracking-tight mb-8">
+              Send an inquiry
+            </h2>
+
+            {submitted ? (
+              <div className="py-12 space-y-4">
+                <p className="font-mono text-xs uppercase tracking-widest text-pink font-semibold">
+                  Inquiry Dispatched
+                </p>
+                <h3 className="font-display text-3xl font-medium">
+                  We'll be in touch shortly.
+                </h3>
+                <p className="font-body text-base text-ink/70 max-w-md font-light leading-relaxed">
+                  Our trade desk representative will review your requirements and respond within 24 hours.
+                </p>
               </div>
-              <h2 className="font-display text-3xl font-bold text-ink">Inquiry Sent Successfully!</h2>
-              <p className="font-body text-sm text-ink/80 max-w-md mx-auto">
-                Thank you for reaching out to LaVision Laminates. Our trade distribution team will respond shortly.
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                  <div className="space-y-2">
+                    <label className="font-mono text-xs uppercase tracking-wider text-ink/50">Your Name *</label>
+                    <input
+                      required
+                      type="text"
+                      placeholder="e.g. Ar. Sameer Vora"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full py-3 bg-transparent border-b border-ink/20 focus:outline-none focus:border-ink font-body text-base text-ink placeholder:text-ink/30"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="font-mono text-xs uppercase tracking-wider text-ink/50">Company / Studio *</label>
+                    <input
+                      required
+                      type="text"
+                      placeholder="e.g. Vora Architects"
+                      value={formData.company}
+                      onChange={(e) => setFormData({ ...formData, company: e.target.value })}
+                      className="w-full py-3 bg-transparent border-b border-ink/20 focus:outline-none focus:border-ink font-body text-base text-ink placeholder:text-ink/30"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="font-mono text-xs uppercase tracking-wider text-ink/50">City (Gujarat) *</label>
+                    <input
+                      required
+                      type="text"
+                      placeholder="e.g. Ahmedabad"
+                      value={formData.city}
+                      onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                      className="w-full py-3 bg-transparent border-b border-ink/20 focus:outline-none focus:border-ink font-body text-base text-ink placeholder:text-ink/30"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <label className="font-mono text-xs uppercase tracking-wider text-ink/50">Phone Number *</label>
+                    <input
+                      required
+                      type="tel"
+                      placeholder="e.g. 098250 XXXXX"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full py-3 bg-transparent border-b border-ink/20 focus:outline-none focus:border-ink font-body text-base text-ink placeholder:text-ink/30"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="font-mono text-xs uppercase tracking-wider text-ink/50">Message / Specification</label>
+                  <textarea
+                    rows={3}
+                    placeholder="Tell us about your project or required decors..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full py-3 bg-transparent border-b border-ink/20 focus:outline-none focus:border-ink font-body text-base text-ink placeholder:text-ink/30 resize-none"
+                  />
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    className="group inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-ink text-cream font-body text-sm font-medium hover:bg-ink/90 transition-colors"
+                  >
+                    <span>Send Message</span>
+                    <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+
+          {/* Showroom Direct Info */}
+          <div className="md:col-span-5 space-y-12 md:border-l border-ink/12 md:pl-12">
+            <div className="space-y-4">
+              <p className="font-mono text-xs uppercase tracking-wider text-ink/40">Rajkot Central Hub</p>
+              <h3 className="font-display text-2xl font-medium text-ink">Tagore Road Hub</h3>
+              <p className="font-body text-sm text-ink/70 leading-relaxed font-light">
+                Opp. Dharti Honda Service Center, Near Shantvan School, GIDC Udhyognagar, Bhakti Nagar, Rajkot 360002
               </p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-5 font-body text-xs">
-              <div className="border-b border-sand pb-3">
-                <h2 className="font-display text-2xl font-semibold text-ink">Send an Inquiry</h2>
-                <p className="font-body text-xs text-ink/70">Fill out the form below for immediate wholesale catalogs and quotes.</p>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1">
-                  <label className="font-mono font-semibold text-ink/80">Your Full Name *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Aniket Sharma"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-2xl bg-white border border-sand focus:outline-none focus:border-pink text-ink"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="font-mono font-semibold text-ink/80">Company / Studio Name</label>
-                  <input
-                    type="text"
-                    placeholder="e.g. Sharma Architects"
-                    value={formData.company}
-                    onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-2xl bg-white border border-sand focus:outline-none focus:border-pink text-ink"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="font-mono font-semibold text-ink/80">City in Gujarat *</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="e.g. Ahmedabad, Rajkot, Surat"
-                    value={formData.city}
-                    onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-2xl bg-white border border-sand focus:outline-none focus:border-pink text-ink"
-                  />
-                </div>
-
-                <div className="space-y-1">
-                  <label className="font-mono font-semibold text-ink/80">Phone / WhatsApp Number *</label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="e.g. 099798 71032"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full px-4 py-2.5 rounded-2xl bg-white border border-sand focus:outline-none focus:border-pink text-ink"
-                  />
-                </div>
-              </div>
-
-              <div className="space-y-1">
-                <label className="font-mono font-semibold text-ink/80">Primary Product of Interest</label>
-                <select
-                  value={formData.interest}
-                  onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-2xl bg-white border border-sand focus:outline-none focus:border-pink text-ink"
-                >
-                  <option value="Laminates">Decorative Laminates</option>
-                  <option value="Louvers">Fluted Louvers & Wall Panels</option>
-                  <option value="Acrylic">High-Gloss Acrylic Sheets</option>
-                  <option value="MDF">Pre-Laminated MDF Boards</option>
-                  <option value="Plywood">Calibrated Marine Plywood</option>
-                  <option value="Dealership">Dealership Application</option>
-                </select>
-              </div>
-
-              <div className="space-y-1">
-                <label className="font-mono font-semibold text-ink/80">Message / Project Details</label>
-                <textarea
-                  rows="3"
-                  placeholder="Tell us about your project scale or specific requirements..."
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full px-4 py-2.5 rounded-2xl bg-white border border-sand focus:outline-none focus:border-pink text-ink"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full py-3.5 rounded-full bg-pink text-white font-body font-bold text-xs hover:bg-pink/90 hover:shadow-glow-pink transition-all shadow-md flex items-center justify-center gap-2"
-              >
-                <span>Send Message</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </form>
-          )}
-        </div>
-
-        {/* Showroom Contacts Info */}
-        <div className="lg:col-span-5 space-y-6">
-          {/* Rajkot Desk */}
-          <div className="p-6 rounded-3xl bg-sand/30 border border-sand space-y-3">
-            <span className="font-mono text-xs font-semibold px-2.5 py-0.5 rounded-full bg-cream text-ink">
-              Rajkot Headquarters
-            </span>
-            <h3 className="font-display text-xl font-bold text-ink">Rajkot Trade Desk</h3>
-            <p className="font-body text-xs text-ink/75 leading-relaxed">
-              Tagore Road, Opp. Dharti Honda Service Center, GIDC Udhyognagar, Rajkot 360002
-            </p>
-            <div className="pt-2">
-              <a href="tel:09428011654" className="font-mono text-sm text-pink font-bold hover:underline flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                <span>☎ 094280 11654</span>
+              <a href="tel:09428011654" className="font-mono text-sm text-ink hover:text-pink block">
+                094280 11654
               </a>
             </div>
-          </div>
 
-          {/* Ahmedabad Desk */}
-          <div className="p-6 rounded-3xl bg-sand/30 border border-sand space-y-3">
-            <span className="font-mono text-xs font-semibold px-2.5 py-0.5 rounded-full bg-cream text-ink">
-              Ahmedabad Hub
-            </span>
-            <h3 className="font-display text-xl font-bold text-ink">Ahmedabad Design Studio</h3>
-            <p className="font-body text-xs text-ink/75 leading-relaxed">
-              FF-107, Olive Greens, Near Vodafone Tower, SG Highway, Gota, Ahmedabad 382481
-            </p>
-            <div className="pt-2">
-              <a href="tel:09979871032" className="font-mono text-sm text-pink font-bold hover:underline flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                <span>☎ 099798 71032</span>
+            <div className="space-y-4">
+              <p className="font-mono text-xs uppercase tracking-wider text-ink/40">Ahmedabad Studio</p>
+              <h3 className="font-display text-2xl font-medium text-ink">Olive Greens Studio</h3>
+              <p className="font-body text-sm text-ink/70 leading-relaxed font-light">
+                FF-107, Olive Greens, Near Vodafone Tower, Near Gota Bridge, SG Highway, Gota, Ahmedabad 382481
+              </p>
+              <a href="tel:09979871032" className="font-mono text-sm text-ink hover:text-pink block">
+                099798 71032
               </a>
             </div>
-          </div>
-
-          {/* Wholesale Disclaimer Box */}
-          <div className="p-5 rounded-2xl bg-cream border border-sand font-mono text-xs text-ink/75 space-y-1">
-            <div className="flex items-center gap-1.5 font-bold text-pink">
-              <ShieldCheck className="w-4 h-4" />
-              <span>Wholesale Notice</span>
-            </div>
-            <p className="font-body text-xs text-ink/65">
-              We exclusively supply dealers, contractors, and architects. Homeowners can obtain materials through our authorized retail dealers.
-            </p>
           </div>
         </div>
       </section>

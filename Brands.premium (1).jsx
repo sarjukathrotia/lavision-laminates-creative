@@ -5,7 +5,7 @@ import { BRANDS } from '../data/brandsData';
 
 /**
  * BRANDS — premium editorial rewrite.
- * Design principles applied:
+ * Design principles applied (use these on every other page too):
  *  1. Material is the hero. Big photography carries the page; UI stays quiet.
  *  2. Restraint of colour. Ink + warm neutrals do the work; magenta appears
  *     only as small punctuation (index numbers, one hover underline).

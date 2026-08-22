@@ -1,120 +1,111 @@
 import React from 'react';
-import { Sparkles, MapPin, Phone, Mail, Clock, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { SHOWROOMS } from '../data/showroomsData';
-import Doodle from '../components/common/Doodle';
 
 export default function Showrooms() {
   return (
-    <div className="pt-24 pb-24 px-4 md:px-8 max-w-7xl mx-auto space-y-24">
-      {/* 1. Header with Oversized Asymmetric Headline */}
-      <section className="max-w-4xl space-y-6">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-sand/60 border border-sand text-ink font-mono text-xs font-semibold uppercase tracking-widest">
-          <Sparkles className="w-3.5 h-3.5 text-lime" />
-          RAJKOT & AHMEDABAD DESIGN CENTERS
+    <div className="bg-cream text-ink">
+      {/* ============================ MASTHEAD ============================ */}
+      <section className="max-w-7xl mx-auto px-6 md:px-10 pt-32 md:pt-40 pb-16 md:pb-24">
+        <div className="grid md:grid-cols-12 gap-8 items-end">
+          <div className="md:col-span-9">
+            <p className="font-mono text-[11px] tracking-[0.25em] uppercase text-ink/45 mb-6">
+              Two physical hubs
+            </p>
+            <h1 className="font-display font-medium leading-[0.95] tracking-[-0.03em]
+                           text-[14vw] md:text-[8.5rem]">
+              The<br />
+              <span className="italic font-normal">design</span> centers.
+            </h1>
+          </div>
+          <div className="md:col-span-3 md:pb-4">
+            <p className="font-body text-base md:text-lg text-ink/70 leading-relaxed max-w-xs">
+              Physical material galleries in Rajkot and Ahmedabad to review full-scale panels under architectural lighting.
+            </p>
+          </div>
         </div>
-
-        <h1 className="font-display text-5xl sm:text-7xl md:text-8xl font-semibold text-ink leading-[1.04] tracking-tight">
-          Step inside our{' '}
-          <span className="relative inline-block text-pink font-display italic">
-            surfaces
-            <Doodle type="circle" color="#E6329B" className="-inset-3 w-[120%] h-[130%]" strokeWidth={3} />
-          </span>{' '}
-          studio.
-        </h1>
-
-        <p className="font-body text-lg md:text-2xl text-ink/80 leading-relaxed font-light max-w-2xl">
-          Full-scale 1:1 architectural display walls, organic curved counters, live 3D texture panels, and comprehensive laminate shade libraries.
-        </p>
       </section>
 
-      {/* 2. Showrooms (Rajkot & Ahmedabad) */}
-      <section className="space-y-20 max-w-6xl mx-auto">
-        {SHOWROOMS.map((showroom, idx) => (
-          <div
-            key={showroom.id}
-            className="p-8 md:p-14 rounded-3xl md:rounded-[48px] bg-cream border border-sand shadow-xs hover:shadow-md transition-all grid grid-cols-1 lg:grid-cols-12 gap-10 items-center"
-          >
-            {/* Showroom Information */}
-            <div className="lg:col-span-6 space-y-6">
-              <div className="space-y-2">
-                <span className="font-mono text-xs font-semibold text-pink uppercase tracking-wider">
-                  Location 0{idx + 1} · {showroom.city.split(' ')[0]}
-                </span>
-                <h2 className="font-display text-3xl md:text-5xl font-bold text-ink">
-                  {showroom.city}
-                </h2>
-                <p className="font-body text-sm text-ink/75 font-medium">
-                  {showroom.tagline}
-                </p>
-              </div>
+      {/* Hairline Divider */}
+      <div className="max-w-7xl mx-auto px-6 md:px-10">
+        <div className="h-px bg-ink/12" />
+      </div>
 
-              {/* Address & Contact */}
-              <div className="space-y-3.5 font-body text-sm text-ink/85 border-y border-sand py-5">
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-sky flex-shrink-0 mt-0.5" />
-                  <p className="leading-relaxed font-light">{showroom.address}</p>
-                </div>
+      {/* ===================== SHOWROOM EDITORIAL ROWS ====================== */}
+      <section className="max-w-7xl mx-auto px-6 md:px-10">
+        {SHOWROOMS.map((showroom, idx) => {
+          const flip = idx % 2 === 1;
 
-                <div className="flex items-center gap-3">
-                  <Phone className="w-5 h-5 text-pink flex-shrink-0" />
-                  <a href={`tel:${showroom.intlPhone}`} className="font-mono font-bold text-pink hover:underline">
-                    {showroom.phone}
-                  </a>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <Clock className="w-5 h-5 text-lime flex-shrink-0" />
-                  <span className="font-mono text-xs text-ink/75">{showroom.hours}</span>
-                </div>
-              </div>
-
-              {/* Highlights */}
-              <div className="space-y-2.5">
-                <span className="font-mono text-[11px] text-ink/60 uppercase font-semibold block">Experience Center Highlights:</span>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                  {showroom.features.map((f, fIdx) => (
-                    <div key={fIdx} className="flex items-center gap-2 font-body text-xs text-ink font-medium">
-                      <CheckCircle2 className="w-4 h-4 text-lime flex-shrink-0" />
-                      <span>{f}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Action Button */}
-              <div className="pt-2">
-                <a
-                  href={`https://maps.google.com/?q=${encodeURIComponent(showroom.address)}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="px-8 py-3.5 rounded-full bg-ink text-cream font-body text-xs font-semibold hover:bg-pink transition-colors inline-flex items-center gap-2 shadow-sm"
-                >
-                  <span>Open Google Maps Directions</span>
-                  <ArrowRight className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
-
-            {/* Showroom Image Arch + Mini Gallery */}
-            <div className="lg:col-span-6 space-y-4">
-              <div className="relative aspect-[16/11] rounded-arch-sm overflow-hidden bg-sand shadow-md border border-sand">
-                <img
-                  src={showroom.image}
-                  alt={showroom.city}
-                  className="w-full h-full object-cover transition-transform duration-700 hover:scale-105"
-                />
-              </div>
-
-              <div className="grid grid-cols-3 gap-3">
-                {showroom.gallery.map((gImg, gIdx) => (
-                  <div key={gIdx} className="aspect-[4/3] rounded-2xl overflow-hidden bg-sand border border-sand shadow-xs">
-                    <img src={gImg} alt="Showroom detail" className="w-full h-full object-cover hover:scale-110 transition-transform duration-500" />
+          return (
+            <div
+              key={showroom.id}
+              className="border-b border-ink/12 py-16 md:py-24"
+            >
+              <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
+                {/* ---- SHOWROOM IMAGE ---- */}
+                <div className={`md:col-span-7 ${flip ? 'md:order-2' : ''}`}>
+                  <div className="relative overflow-hidden rounded-lg bg-sand aspect-[16/10] md:aspect-[16/9]">
+                    <img
+                      src={showroom.image}
+                      alt={showroom.city}
+                      loading="lazy"
+                      className="w-full h-full object-cover"
+                    />
+                    <span className="absolute top-5 left-6 font-mono text-xs tracking-widest text-cream/90 mix-blend-difference">
+                      Location 0{idx + 1}
+                    </span>
                   </div>
-                ))}
+                </div>
+
+                {/* ---- TEXT & DETAILS COLUMN ---- */}
+                <div className={`md:col-span-5 ${flip ? 'md:order-1' : ''}`}>
+                  <p className="font-mono text-[11px] tracking-[0.2em] uppercase text-ink/45 mb-4">
+                    {showroom.city.split(' ')[0]} Hub
+                  </p>
+
+                  <h2 className="font-display text-4xl md:text-5xl font-medium tracking-[-0.02em] leading-none mb-6">
+                    {showroom.city}
+                  </h2>
+
+                  <p className="font-body text-base md:text-lg text-ink/75 leading-relaxed font-light mb-6">
+                    {showroom.address}
+                  </p>
+
+                  <div className="space-y-2 font-mono text-xs text-ink/65 mb-8">
+                    <div>
+                      <span className="text-ink/40">Direct: </span>
+                      <a href={`tel:${showroom.intlPhone}`} className="text-ink hover:text-pink transition-colors font-medium">
+                        {showroom.phone}
+                      </a>
+                    </div>
+                    <div>
+                      <span className="text-ink/40">Timings: </span>
+                      <span>{showroom.hours}</span>
+                    </div>
+                  </div>
+
+                  <p className="font-body text-sm text-ink/45 leading-relaxed mb-8">
+                    {showroom.features.join('  ·  ')}
+                  </p>
+
+                  <div className="pt-5 border-t border-ink/12">
+                    <a
+                      href={`https://maps.google.com/?q=${encodeURIComponent(showroom.address)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group inline-flex items-center gap-2 font-body text-sm text-ink hover:text-pink transition-colors"
+                    >
+                      <span className="border-b border-ink/30 pb-0.5 group-hover:border-pink">
+                        Get driving directions
+                      </span>
+                      <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </section>
     </div>
   );
