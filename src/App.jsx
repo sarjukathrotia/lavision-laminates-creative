@@ -1,9 +1,8 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { Box, Sparkles } from 'lucide-react';
 
-// Shared Components
-import GlassNav from './components/common/GlassNav';
+// Shared Architectural Components
+import ArchitecturalNav from './components/common/ArchitecturalNav';
 import Footer from './components/common/Footer';
 import ScrollToTop from './components/common/ScrollToTop';
 
@@ -25,28 +24,23 @@ import CatalogueDownload from './pages/CatalogueDownload';
 import Privacy from './pages/Privacy';
 import Terms from './pages/Terms';
 
-// Lazy Loaded 3D View (Splits Three.js, R3F, and Drei from main bundle)
+// Lazy Loaded 3D Studio View
 const Virtual3D = lazy(() => import('./pages/Virtual3D'));
 
 import { useLenis } from './hooks/useLenis';
 
-function Loading3DFallback() {
+function LoadingStudioFallback() {
   return (
-    <div className="min-h-[70vh] flex flex-col items-center justify-center p-8 text-center space-y-4 pt-28">
-      <div className="w-16 h-16 rounded-3xl bg-skyP/60 border border-sky/30 flex items-center justify-center text-sky animate-bounce shadow-md">
-        <Box className="w-8 h-8 animate-spin" style={{ animationDuration: '4s' }} />
-      </div>
-      <div className="space-y-1">
-        <span className="font-mono text-xs text-pink uppercase font-semibold tracking-wider">
-          WebGL Environment
-        </span>
-        <h3 className="font-display text-2xl font-semibold text-ink">
-          Loading 3D Material Studio...
-        </h3>
-        <p className="font-body text-xs text-ink/70 max-w-sm">
-          Preparing high-resolution PBR surface textures & shaders.
-        </p>
-      </div>
+    <div className="min-h-[70vh] flex flex-col items-center justify-center p-8 text-center space-y-4 pt-36 bg-paper text-ink">
+      <p className="font-body text-[11px] tracking-[0.25em] uppercase text-graphite">
+        WEBGL STUDIO ENVIRONMENT
+      </p>
+      <h3 className="font-serif text-3xl font-light text-ink">
+        Loading 3D Material Studio...
+      </h3>
+      <p className="font-body text-xs text-graphite font-light max-w-sm">
+        Calibrating physical surface reflections & normal textures.
+      </p>
     </div>
   );
 }
@@ -57,10 +51,10 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div className="min-h-screen bg-cream text-ink flex flex-col justify-between selection:bg-pinkP selection:text-pink">
-        <GlassNav />
+      <div className="min-h-screen bg-paper text-ink flex flex-col justify-between selection:bg-ink selection:text-paper">
+        <ArchitecturalNav />
         <main className="flex-grow">
-          <Suspense fallback={<Loading3DFallback />}>
+          <Suspense fallback={<LoadingStudioFallback />}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />

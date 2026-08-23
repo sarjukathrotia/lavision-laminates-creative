@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { Sparkles, Download, FileText, CheckCircle2, ArrowRight, ShieldCheck } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { CATALOGUES } from '../data/showroomsData';
+
+/**
+ * CATALOGUES — Luxury Specification Folders (Prada / Celine standard).
+ */
 
 export default function CatalogueDownload() {
   const [downloadedItem, setDownloadedItem] = useState(null);
@@ -13,93 +17,111 @@ export default function CatalogueDownload() {
   };
 
   return (
-    <div className="pt-28 pb-20 px-4 md:px-8 max-w-7xl mx-auto space-y-16">
-      {/* Header */}
-      <section className="text-center max-w-3xl mx-auto space-y-4">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-pinkP text-ink font-mono text-xs font-semibold uppercase tracking-widest">
-          <Download className="w-3.5 h-3.5 text-pink" />
-          DIGITAL SPECIFICATION CATALOGUES (2026)
-        </div>
+    <div className="bg-paper text-ink selection:bg-ink selection:text-paper pt-36 md:pt-48 pb-28 md:pb-40">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 space-y-16">
 
-        <h1 className="font-display text-4xl sm:text-6xl font-semibold text-ink leading-tight">
-          Download comprehensive <span className="text-pink italic">shade cards</span>.
-        </h1>
+        {/* ============================ 1. MASTHEAD ============================ */}
+        <section className="space-y-6">
+          <p className="font-body text-[11px] tracking-[0.25em] uppercase text-graphite">
+            ARCHITECTURAL SPECIFICATION ARCHIVES
+          </p>
+          <div className="grid md:grid-cols-12 gap-8 items-end">
+            <div className="md:col-span-8">
+              <h1 className="font-serif font-light leading-[0.92] tracking-[-0.03em] text-ink text-[14vw] md:text-[8rem] lg:text-[9.5rem]">
+                Digital<br />
+                <span className="italic font-normal">shade</span> folders.
+              </h1>
+            </div>
+            <div className="md:col-span-4 md:pb-3">
+              <p className="font-body text-base md:text-lg text-graphite font-light leading-relaxed max-w-sm">
+                High-resolution PDF archives containing calibrated texture studies, substrate compositions, and dimensional gauges.
+              </p>
+            </div>
+          </div>
+        </section>
 
-        <p className="font-body text-base md:text-lg text-ink/80 leading-relaxed">
-          High-resolution PDF catalogues with exact texture previews, technical fire/water endurance ratings, and dimensional specifications.
-        </p>
+        {/* Hairline Divider */}
+        <div className="h-px bg-line" />
 
         {downloadedItem && (
-          <div className="p-3 rounded-full bg-limeP border border-lime/30 text-ink font-mono text-xs inline-flex items-center gap-2 animate-in fade-in">
-            <CheckCircle2 className="w-4 h-4 text-lime" />
-            <span>Downloading {downloadedItem}...</span>
+          <div className="p-4 border border-line bg-alabaster font-body text-xs tracking-wider uppercase text-ink">
+            ARCHIVE TRANSFER INITIATED: {downloadedItem}
           </div>
         )}
-      </section>
 
-      {/* Catalogue Cards Grid */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        {CATALOGUES.map((cat, idx) => (
-          <div
-            key={cat.id}
-            className="p-6 rounded-3xl bg-sand/30 border border-sand shadow-sm hover:shadow-md transition-all flex flex-col justify-between space-y-5"
-          >
-            {/* Top Preview Arch */}
-            <div className="relative aspect-[4/3] rounded-arch-sm overflow-hidden bg-sand shadow-inner border border-sand">
-              <img
-                src={cat.coverImage}
-                alt={cat.title}
-                className="w-full h-full object-cover"
-              />
-              {cat.isNew && (
-                <span className="absolute top-3 right-3 px-3 py-0.5 rounded-full bg-pink text-white font-mono text-[10px] font-bold">
-                  2026 EDITION
-                </span>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <div className="flex items-center justify-between font-mono text-xs text-ink/60">
-                <span>{cat.brand}</span>
-                <span>{cat.code}</span>
-              </div>
-
-              <h3 className="font-display text-xl font-bold text-ink">
-                {cat.title}
-              </h3>
-
-              <div className="flex items-center gap-4 font-mono text-xs text-ink/70 pt-1">
-                <span>{cat.pages}</span>
-                <span>·</span>
-                <span>{cat.size}</span>
-              </div>
-            </div>
-
-            <button
-              onClick={() => handleDownload(cat)}
-              className="w-full py-3 rounded-full bg-cream border border-sand text-ink font-body text-xs font-semibold hover:bg-pink hover:text-white hover:border-pink transition-all flex items-center justify-center gap-2 shadow-xs"
+        {/* ============================ 2. CATALOGUE PLATES ============================ */}
+        <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
+          {CATALOGUES.map((cat, idx) => (
+            <div
+              key={cat.id}
+              className="border-t border-line pt-6 space-y-4 flex flex-col justify-between"
             >
-              <Download className="w-4 h-4" />
-              <span>Download PDF Catalogue</span>
-            </button>
-          </div>
-        ))}
-      </section>
+              <div className="space-y-4">
+                <div className="relative aspect-[16/10] overflow-hidden bg-sand">
+                  <img
+                    src={cat.coverImage}
+                    alt={cat.title}
+                    className="w-full h-full object-cover"
+                  />
+                  <span className="absolute top-4 left-4 font-mono text-[10px] tracking-widest text-paper mix-blend-difference">
+                    0{idx + 1} / {cat.brand}
+                  </span>
+                </div>
 
-      {/* Physical Sample Kits Notice */}
-      <section className="p-8 md:p-12 rounded-3xl bg-sand/40 border border-sand flex flex-col sm:flex-row items-center justify-between gap-6 max-w-5xl mx-auto">
-        <div className="space-y-1">
-          <h3 className="font-display text-2xl font-semibold text-ink">Require physical 1:1 sample folders?</h3>
-          <p className="font-body text-xs md:text-sm text-ink/75">Architects and dealers in Gujarat can request physical swatch folder sets delivered directly to their studio.</p>
-        </div>
-        <a
-          href="tel:09428011654"
-          className="px-6 py-3 rounded-full bg-ink text-cream font-body text-xs font-semibold hover:bg-pink transition-all flex items-center gap-2 flex-shrink-0"
-        >
-          <span>Request Physical Box</span>
-          <ArrowRight className="w-4 h-4" />
-        </a>
-      </section>
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between font-body text-[11px] tracking-[0.2em] uppercase text-graphite">
+                    <span>{cat.brand}</span>
+                    <span className="font-mono text-[10px] text-graphite/60">{cat.code}</span>
+                  </div>
+
+                  <h3 className="font-serif text-2xl font-light text-ink">
+                    {cat.title}
+                  </h3>
+
+                  <p className="font-body text-xs text-graphite font-light">
+                    {cat.pages} · {cat.size}
+                  </p>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-line">
+                <button
+                  onClick={() => handleDownload(cat)}
+                  className="group inline-flex items-center gap-2 font-body text-xs uppercase tracking-[0.2em] text-ink w-full justify-between"
+                >
+                  <span className="border-b border-ink/40 pb-0.5 group-hover:border-ink transition-colors">
+                    DOWNLOAD PDF DOSSIER
+                  </span>
+                  <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </section>
+
+        {/* ============================ 3. PHYSICAL BOX REQUEST ============================ */}
+        <section className="border-t border-line pt-16 md:pt-24 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+          <div className="space-y-2">
+            <h3 className="font-serif text-3xl md:text-5xl font-light text-ink">
+              Require physical 1:1 swatch folders?
+            </h3>
+            <p className="font-body text-base text-graphite font-light max-w-md">
+              Architects and design studios in Gujarat can request complete physical swatch binders delivered directly to their offices.
+            </p>
+          </div>
+
+          <a
+            href="tel:09428011654"
+            className="group inline-flex items-center gap-2 font-body text-xs uppercase tracking-[0.2em] text-ink"
+          >
+            <span className="border-b border-ink pb-0.5 group-hover:border-graphite transition-colors">
+              REQUEST PHYSICAL SWATCHES
+            </span>
+            <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
+        </section>
+
+      </div>
     </div>
   );
 }
