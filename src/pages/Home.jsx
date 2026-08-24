@@ -1,16 +1,32 @@
 import React, { useState } from 'react';
 import Hero3DCanvas from '../components/hero/Hero3DCanvas';
 import HeroTypography from '../components/hero/HeroTypography';
+import BrandStatement from '../components/home/BrandStatement';
+import MaterialExplorer from '../components/home/MaterialExplorer';
+import SignatureCollections from '../components/home/SignatureCollections';
+import MaterialTransformation from '../components/home/MaterialTransformation';
+import MaterialAnatomy from '../components/home/MaterialAnatomy';
+import ApplicationsMatrix from '../components/home/ApplicationsMatrix';
+import VirtualTryOn from '../components/home/VirtualTryOn';
+import ArchitecturalProjects from '../components/home/ArchitecturalProjects';
+import ShowroomExperience from '../components/home/ShowroomExperience';
+import FinalCTA from '../components/home/FinalCTA';
 
 /**
- * HOMEPAGE (First Task: Section 01 Navigation & Section 02 Cinematic 3D Hero)
+ * HOMEPAGE — INTERACTIVE MATERIAL UNIVERSE (12 Architectural Folds)
  * 
- * Interactive Material Universe hero:
- * - Large 3D physical laminate panel with PBR textures and chamfered edges.
- * - Mouse parallax interaction and dampened rotation.
- * - Headline: "SURFACES THAT SHAPE SPACE." with line-by-line GSAP reveals.
- * - Interactive material formulation swatch switcher.
- * - SVG blueprint doodle annotations.
+ * 01. Architectural Navigation (Global)
+ * 02. Cinematic 3D Hero ("SURFACES THAT SHAPE SPACE.")
+ * 03. Brand Manifesto & Architectural Statement
+ * 04. Interactive Material Explorer (8 Surface Classifications)
+ * 05. Signature Collections Showcase (8 Brand Houses)
+ * 06. Material → Object Transformation (2D Sheet to Living Architecture)
+ * 07. Material Anatomy (Exploded 3D Layer Breakdown)
+ * 08. Architectural Applications Matrix (Kitchen, Bedroom, Office, etc.)
+ * 09. Virtual Try-On Studio (Interactive Space Comparison)
+ * 10. Selected Architectural Works (Villa & Penthouse Portfolio)
+ * 11. Physical Design Centers (Rajkot & Ahmedabad Hubs)
+ * 12. Final Cinematic CTA ("LET'S SHAPE YOUR SPACE.")
  */
 
 const HERO_FINISH_PRESETS = [
@@ -28,13 +44,9 @@ export default function Home() {
   return (
     <div className="bg-paper text-ink selection:bg-ink selection:text-paper">
       
-      {/* ============================ SECTION 02: CINEMATIC 3D HERO ============================ */}
-      <section className="relative w-full h-screen min-h-[700px] overflow-hidden bg-gradient-to-b from-paper via-alabaster to-stone/30">
-        
-        {/* Three.js / R3F 3D Physical Laminate Slab */}
+      {/* ============================ 02. CINEMATIC 3D HERO ============================ */}
+      <section className="relative w-full h-screen min-h-[760px] overflow-hidden bg-gradient-to-b from-paper via-alabaster to-stone/30">
         <Hero3DCanvas activeFinish={activeFinish} isGlossy={isGlossy} />
-
-        {/* Cinematic Headline & Interactive Formulation Switcher */}
         <HeroTypography
           activeFinish={activeFinish}
           setActiveFinish={setActiveFinish}
@@ -42,8 +54,37 @@ export default function Home() {
           isGlossy={isGlossy}
           setIsGlossy={setIsGlossy}
         />
-
       </section>
+
+      {/* ============================ 03. BRAND MANIFESTO ============================ */}
+      <BrandStatement />
+
+      {/* ============================ 04. MATERIAL EXPLORER ============================ */}
+      <MaterialExplorer />
+
+      {/* ============================ 05. SIGNATURE COLLECTIONS ============================ */}
+      <SignatureCollections />
+
+      {/* ============================ 06. MATERIAL → OBJECT TRANSFORMATION ============================ */}
+      <MaterialTransformation />
+
+      {/* ============================ 07. MATERIAL ANATOMY ============================ */}
+      <MaterialAnatomy />
+
+      {/* ============================ 08. APPLICATIONS MATRIX ============================ */}
+      <ApplicationsMatrix />
+
+      {/* ============================ 09. VIRTUAL TRY-ON STUDIO ============================ */}
+      <VirtualTryOn />
+
+      {/* ============================ 10. ARCHITECTURAL PROJECTS ============================ */}
+      <ArchitecturalProjects />
+
+      {/* ============================ 11. PHYSICAL SHOWROOMS ============================ */}
+      <ShowroomExperience />
+
+      {/* ============================ 12. FINAL CINEMATIC CTA ============================ */}
+      <FinalCTA />
 
     </div>
   );
